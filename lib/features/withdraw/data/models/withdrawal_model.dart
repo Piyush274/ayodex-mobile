@@ -1,5 +1,5 @@
 import 'package:decimal/decimal.dart';
-import '../../exchange/data/models/currency_model.dart';
+import 'package:ayodex/features/exchange/data/models/currency_model.dart';
 
 class WithdrawalModel {
   final int id;
