@@ -1,5 +1,5 @@
 import 'package:decimal/decimal.dart';
-import '../../../../core/models/dynamic_form_model.dart';
+import 'package:ayodex/core/models/dynamic_form_model.dart';
 
 class CurrencyModel {
   final int id;

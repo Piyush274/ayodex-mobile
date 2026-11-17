@@ -14,7 +14,7 @@ abstract class BaseRepository {
         if (response.data != null) {
           return response.data!;
         }
-        if (T == dynamic || T == void) {
+        if (null is T) {
           return null as T;
         }
       }

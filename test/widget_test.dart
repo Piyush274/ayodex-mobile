@@ -1,14 +1,63 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/main.dart';
-import 'package:ayodex/core/widgets/app_button.dart';
+import 'package:ayodex/core/constants/app_strings.dart';
+import 'package:ayodex/features/auth/presentation/controllers/auth_controller.dart';
+
+class FakeAuthController extends StateNotifier<AuthState> implements AuthController {
+  FakeAuthController() : super(const AuthState());
+
+  @override
+  Future<void> initialize() async {
+    state = const AuthState(status: AuthStatus.unauthenticated);
+  }
+
+  @override
+  Future<bool> login(String username, String password) async => true;
+
+  @override
+  Future<bool> register({
+    required String firstname,
+    required String lastname,
+    required String email,
+    required String password,
+    required String passwordConfirmation,
+    required bool agree,
+    String? reference,
+  }) async => true;
+
+  @override
+  Future<bool> completeProfile({
+    required String countryCode,
+    required String country,
+    required String mobileCode,
+    required String username,
+    required String mobile,
+    String? address,
+    String? city,
+    String? stateName,
+    String? zip,
+  }) async => true;
+
+  @override
+  Future<void> logout() async {}
+
+  @override
+  void clearError() {}
+}
 
 void main() {
-  testWidgets('AyodexApp smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(const AyodexApp());
+  testWidgets('AyodexApp smoke test boots router and renders splash screen', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          authControllerProvider.overrideWith((ref) => FakeAuthController()),
+        ],
+        child: const AyodexApp(),
+      ),
+    );
 
-    expect(find.text('AYODEX'), findsOneWidget);
-    expect(find.text('AYODEX Theme & Design System'), findsOneWidget);
-    expect(find.byType(AppButton), findsWidgets);
+    expect(find.text(AppStrings.appName), findsWidgets);
+    expect(find.text(AppStrings.appTagline), findsOneWidget);
   });
 }
