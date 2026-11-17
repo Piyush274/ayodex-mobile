@@ -2,10 +2,14 @@
 
 [![Flutter](https://img.shields.io/badge/Flutter-02569B?style=flat&logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-0175C2?style=flat&logo=dart&logoColor=white)](https://dart.dev)
-[![Platform](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS-orange.svg)](#)
+[![Live Demo](https://img.shields.io/badge/Live%20Preview-GitHub%20Pages-28C76F?style=flat&logo=github)](https://piyush274.github.io/ayodex-mobile/)
+[![Platform](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Web-orange.svg)](#)
 [![License](https://img.shields.io/badge/License-Proprietary-blue.svg)](#)
 
 > Fast, secure, and intuitive cross-platform mobile application for multi-currency fiat & crypto exchange, digital wallet management, and instant bank payouts across West Africa (primary markets in **Benin 🇧🇯** and **Nigeria 🇳🇬**).
+
+🔗 **Live Web Preview**: [https://piyush274.github.io/ayodex-mobile/](https://piyush274.github.io/ayodex-mobile/)
+
 
 ---
 

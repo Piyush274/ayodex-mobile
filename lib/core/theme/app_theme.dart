@@ -31,7 +31,7 @@ class AppTheme {
         iconTheme: IconThemeData(color: AppColors.heading),
         titleTextStyle: AppTextTheme.headingMedium,
       ),
-      cardTheme: const CardTheme(
+      cardTheme: const CardThemeData(
         color: AppColors.surface,
         elevation: 0,
         shape: RoundedRectangleBorder(

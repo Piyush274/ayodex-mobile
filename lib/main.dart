@@ -1,121 +1,234 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
+import 'core/constants/app_colors.dart';
+import 'core/constants/app_dimensions.dart';
+import 'core/constants/app_strings.dart';
+import 'core/theme/app_theme.dart';
+import 'core/theme/text_theme.dart';
+import 'core/widgets/app_button.dart';
+import 'core/widgets/app_text_field.dart';
+import 'core/widgets/custom_card.dart';
+import 'core/widgets/status_badge.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const AyodexApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AyodexApp extends StatelessWidget {
+  const AyodexApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: AppStrings.appName,
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+      home: const ThemeShowcaseScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class ThemeShowcaseScreen extends StatefulWidget {
+  const ThemeShowcaseScreen({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<ThemeShowcaseScreen> createState() => _ThemeShowcaseScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _ThemeShowcaseScreenState extends State<ThemeShowcaseScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+        title: const Text(AppStrings.appName),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: AppDimensions.p16),
+            child: StatusBadge(
+              label: 'Step 1 Ready',
+              color: AppColors.success,
+              icon: Icons.check_circle_outline,
             ),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppDimensions.p16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Welcome Header
+            Text(
+              'AYODEX Theme & Design System',
+              style: AppTextTheme.headingLarge,
+            ),
+            const SizedBox(height: AppDimensions.p4),
+            Text(
+              'Mirrors the active "orange_oasis" website styling tokens.',
+              style: AppTextTheme.bodyMedium,
+            ),
+            const SizedBox(height: AppDimensions.p20),
+
+            // Color Swatches Card
+            CustomCard(
+              title: 'Brand Palette',
+              child: Wrap(
+                spacing: AppDimensions.p12,
+                runSpacing: AppDimensions.p12,
+                children: const [
+                  _ColorChip(name: 'Base Orange', color: AppColors.base, hex: '#FF6033'),
+                  _ColorChip(name: 'Accent Obsidian', color: AppColors.accent, hex: '#110226'),
+                  _ColorChip(name: 'Heading Slate', color: AppColors.heading, hex: '#353A69'),
+                  _ColorChip(name: 'Body Grey', color: AppColors.body, hex: '#515E80'),
+                  _ColorChip(name: 'Success', color: AppColors.success, hex: '#28C76F'),
+                  _ColorChip(name: 'Danger', color: AppColors.danger, hex: '#EA5455'),
+                  _ColorChip(name: 'Warning', color: AppColors.warning, hex: '#FF9F43'),
+                  _ColorChip(name: 'Info', color: AppColors.info, hex: '#1DA1F2'),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppDimensions.p20),
+
+            // Status Badges
+            CustomCard(
+              title: 'Status Pills',
+              child: Wrap(
+                spacing: AppDimensions.p8,
+                runSpacing: AppDimensions.p8,
+                children: const [
+                  StatusBadge(label: 'Approved', color: AppColors.success, icon: Icons.check_circle),
+                  StatusBadge(label: 'Pending', color: AppColors.warning, icon: Icons.hourglass_top),
+                  StatusBadge(label: 'Processing', color: AppColors.info, icon: Icons.sync),
+                  StatusBadge(label: 'Canceled', color: AppColors.danger, icon: Icons.cancel),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppDimensions.p20),
+
+            // Input Fields Card
+            CustomCard(
+              title: 'Form Inputs',
+              child: Column(
+                children: [
+                  AppTextField(
+                    label: AppStrings.emailOrUsername,
+                    hint: 'user@example.com or username',
+                    controller: _emailController,
+                    prefixIcon: const Icon(Icons.person_outline, size: 20),
+                  ),
+                  const SizedBox(height: AppDimensions.p16),
+                  AppTextField(
+                    label: AppStrings.password,
+                    hint: '••••••••',
+                    controller: _passwordController,
+                    isPassword: true,
+                    prefixIcon: const Icon(Icons.lock_outline, size: 20),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppDimensions.p20),
+
+            // Action Buttons Card
+            CustomCard(
+              title: 'Button Variants',
+              child: Column(
+                children: [
+                  AppButton(
+                    text: 'Primary Base Button',
+                    variant: AppButtonVariant.primary,
+                    icon: Icons.currency_exchange,
+                    onPressed: () {},
+                  ),
+                  const SizedBox(height: AppDimensions.p12),
+                  AppButton(
+                    text: 'Secondary Accent Button',
+                    variant: AppButtonVariant.secondary,
+                    onPressed: () {},
+                  ),
+                  const SizedBox(height: AppDimensions.p12),
+                  AppButton(
+                    text: 'Outline Button',
+                    variant: AppButtonVariant.outline,
+                    onPressed: () {},
+                  ),
+                  const SizedBox(height: AppDimensions.p12),
+                  const AppButton(
+                    text: 'Loading Button',
+                    isLoading: true,
+                    onPressed: null,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppDimensions.p32),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+    );
+  }
+}
+
+class _ColorChip extends StatelessWidget {
+  final String name;
+  final Color color;
+  final String hex;
+
+  const _ColorChip({
+    required this.name,
+    required this.color,
+    required this.hex,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 140,
+      padding: const EdgeInsets.all(AppDimensions.p8),
+      decoration: BoxDecoration(
+        color: AppColors.background,
+        borderRadius: AppDimensions.borderRadiusMedium,
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 24,
+            height: 24,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(4),
+            ),
+          ),
+          const SizedBox(width: AppDimensions.p8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  name,
+                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  hex,
+                  style: const TextStyle(fontSize: 10, color: AppColors.textMuted),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

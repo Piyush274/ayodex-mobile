@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AppDimensions {
   AppDimensions._();
@@ -22,13 +22,16 @@ class AppDimensions {
   // Border Radii
   static const double radiusSmall = 4.0;
   static const double radiusMedium = 6.0; // Standard for buttons and inputs
-  static const double radiusCard = 12.0;  // Standard for cards
+  static const double radiusCard = 12.0; // Standard for cards
   static const double radiusLarge = 16.0;
-  static const double radiusPill = 20.0;  // For status badges
+  static const double radiusPill = 20.0; // For status badges
 
-  static const BorderRadius borderRadiusMedium = BorderRadius.all(Radius.circular(radiusMedium));
-  static const BorderRadius borderRadiusCard = BorderRadius.all(Radius.circular(radiusCard));
-  static const BorderRadius borderRadiusPill = BorderRadius.all(Radius.circular(radiusPill));
+  static const BorderRadius borderRadiusMedium =
+      BorderRadius.all(Radius.circular(radiusMedium));
+  static const BorderRadius borderRadiusCard =
+      BorderRadius.all(Radius.circular(radiusCard));
+  static const BorderRadius borderRadiusPill =
+      BorderRadius.all(Radius.circular(radiusPill));
 
   // Elevation & Shadows
   static const List<BoxShadow> cardShadow = [
