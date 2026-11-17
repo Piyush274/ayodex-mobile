@@ -9,10 +9,14 @@ import 'package:ayodex/core/widgets/app_button.dart';
 import 'package:ayodex/core/widgets/custom_card.dart';
 import 'package:ayodex/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:ayodex/features/auth/presentation/screens/complete_profile_screen.dart';
+import 'package:ayodex/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:ayodex/features/auth/presentation/screens/login_screen.dart';
 import 'package:ayodex/features/auth/presentation/screens/onboarding_screen.dart';
 import 'package:ayodex/features/auth/presentation/screens/register_screen.dart';
+import 'package:ayodex/features/auth/presentation/screens/reset_password_screen.dart';
 import 'package:ayodex/features/auth/presentation/screens/splash_screen.dart';
+import 'package:ayodex/features/auth/presentation/screens/verify_reset_code_screen.dart';
+import 'package:ayodex/features/auth/presentation/screens/authorization_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -59,7 +63,43 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/forgot-password',
         name: 'forgot-password',
-        builder: (context, state) => const _ForgotPasswordPlaceholderScreen(),
+        builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: '/verify-reset-code',
+        name: 'verify-reset-code',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          final email = extra?['email'] ?? state.uri.queryParameters['email'] ?? '';
+          return VerifyResetCodeScreen(email: email);
+        },
+      ),
+      GoRoute(
+        path: '/reset-password',
+        name: 'reset-password',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          final email = extra?['email'] ?? state.uri.queryParameters['email'] ?? '';
+          final token = extra?['token'] ?? state.uri.queryParameters['token'] ?? '';
+          return ResetPasswordScreen(email: email, token: token);
+        },
+      ),
+      GoRoute(
+        path: '/authorization',
+        name: 'authorization',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          final typeString = extra?['type'] ?? state.uri.queryParameters['type'] ?? 'email';
+          AuthorizationType type;
+          if (typeString == 'sms') {
+            type = AuthorizationType.sms;
+          } else if (typeString == '2fa' || typeString == 'g2fa') {
+            type = AuthorizationType.twoFactor;
+          } else {
+            type = AuthorizationType.email;
+          }
+          return AuthorizationScreen(type: type);
+        },
       ),
     ],
   );
@@ -170,42 +210,6 @@ class _BannedScreen extends ConsumerWidget {
                     context.go('/login');
                   }
                 },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ForgotPasswordPlaceholderScreen extends StatelessWidget {
-  const _ForgotPasswordPlaceholderScreen();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Password Recovery')),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(AppDimensions.p24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.lock_reset, size: 64, color: AppColors.base),
-              const SizedBox(height: AppDimensions.p16),
-              Text('Password Recovery', style: AppTextTheme.headingLarge),
-              const SizedBox(height: AppDimensions.p8),
-              Text(
-                '3-Step OTP Verification will be implemented in Step 5.',
-                textAlign: TextAlign.center,
-                style: AppTextTheme.bodyMedium,
-              ),
-              const SizedBox(height: AppDimensions.p24),
-              AppButton(
-                text: 'Back to Login',
-                variant: AppButtonVariant.outline,
-                onPressed: () => context.pop(),
               ),
             ],
           ),
