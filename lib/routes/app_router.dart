@@ -17,6 +17,10 @@ import 'package:ayodex/features/auth/presentation/screens/reset_password_screen.
 import 'package:ayodex/features/auth/presentation/screens/splash_screen.dart';
 import 'package:ayodex/features/auth/presentation/screens/verify_reset_code_screen.dart';
 import 'package:ayodex/features/auth/presentation/screens/authorization_screen.dart';
+import 'package:ayodex/features/pin/presentation/screens/pin_status_screen.dart';
+import 'package:ayodex/features/pin/presentation/screens/set_pin_screen.dart';
+import 'package:ayodex/features/pin/presentation/screens/change_pin_screen.dart';
+import 'package:ayodex/features/pin/presentation/screens/two_factor_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -101,6 +105,26 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           return AuthorizationScreen(type: type);
         },
       ),
+      GoRoute(
+        path: '/security/pin',
+        name: 'security-pin',
+        builder: (context, state) => const PinStatusScreen(),
+      ),
+      GoRoute(
+        path: '/security/set-pin',
+        name: 'security-set-pin',
+        builder: (context, state) => const SetPinScreen(),
+      ),
+      GoRoute(
+        path: '/security/change-pin',
+        name: 'security-change-pin',
+        builder: (context, state) => const ChangePinScreen(),
+      ),
+      GoRoute(
+        path: '/security/2fa',
+        name: 'security-2fa',
+        builder: (context, state) => const TwoFactorScreen(),
+      ),
     ],
   );
 });
@@ -155,6 +179,11 @@ class _DashboardPlaceholderScreen extends ConsumerWidget {
                       Text('Mobile: ${user.mobile}', style: AppTextTheme.bodyMedium),
                     ],
                     const SizedBox(height: AppDimensions.p16),
+                    AppButton(
+                      text: 'Security & PIN',
+                      onPressed: () => context.push('/security/pin'),
+                    ),
+                    const SizedBox(height: AppDimensions.p12),
                     AppButton(
                       text: 'Log Out',
                       variant: AppButtonVariant.outline,
