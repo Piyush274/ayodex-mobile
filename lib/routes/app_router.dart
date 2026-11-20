@@ -6,7 +6,8 @@ import 'package:ayodex/core/constants/app_dimensions.dart';
 import 'package:ayodex/core/constants/app_strings.dart';
 import 'package:ayodex/core/theme/text_theme.dart';
 import 'package:ayodex/core/widgets/app_button.dart';
-import 'package:ayodex/core/widgets/custom_card.dart';
+import 'package:ayodex/core/widgets/app_shell_scaffold.dart';
+import 'package:ayodex/routes/route_guards.dart';
 import 'package:ayodex/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:ayodex/features/auth/presentation/screens/complete_profile_screen.dart';
 import 'package:ayodex/features/auth/presentation/screens/forgot_password_screen.dart';
@@ -23,10 +24,36 @@ import 'package:ayodex/features/pin/presentation/screens/change_pin_screen.dart'
 import 'package:ayodex/features/pin/presentation/screens/two_factor_screen.dart';
 import 'package:ayodex/features/kyc/presentation/screens/kyc_form_screen.dart';
 import 'package:ayodex/features/kyc/presentation/screens/kyc_status_screen.dart';
+import 'package:ayodex/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:ayodex/features/wallet/presentation/screens/transactions_screen.dart';
+import 'package:ayodex/features/exchange/presentation/screens/exchange_create_screen.dart';
+import 'package:ayodex/features/exchange/presentation/screens/exchange_preview_screen.dart';
+import 'package:ayodex/features/exchange/presentation/screens/exchange_manual_payment_screen.dart';
+import 'package:ayodex/features/exchange/presentation/screens/exchange_history_screen.dart';
+import 'package:ayodex/features/exchange/presentation/screens/exchange_detail_screen.dart';
+import 'package:ayodex/features/exchange/presentation/screens/exchange_track_screen.dart';
+import 'package:ayodex/features/transfers/presentation/screens/transfer_new_screen.dart';
+import 'package:ayodex/features/transfers/presentation/screens/transfer_quote_preview_screen.dart';
+import 'package:ayodex/features/transfers/presentation/screens/transfer_processing_screen.dart';
+import 'package:ayodex/features/transfers/presentation/screens/transfer_history_screen.dart';
+import 'package:ayodex/features/transfers/presentation/screens/transfer_detail_screen.dart';
+import 'package:ayodex/features/withdraw/presentation/screens/withdraw_methods_screen.dart';
+import 'package:ayodex/features/withdraw/presentation/screens/withdraw_history_screen.dart';
+import 'package:ayodex/features/support/presentation/screens/support_tickets_screen.dart';
+import 'package:ayodex/features/support/presentation/screens/create_ticket_screen.dart';
+import 'package:ayodex/features/support/presentation/screens/ticket_view_screen.dart';
+import 'package:ayodex/features/notifications/presentation/screens/notifications_screen.dart';
+import 'package:ayodex/features/profile/presentation/screens/profile_screen.dart';
+import 'package:ayodex/features/profile/presentation/screens/change_password_screen.dart';
+import 'package:ayodex/features/profile/presentation/screens/affiliate_screen.dart';
+import 'package:ayodex/features/profile/presentation/screens/policy_screen.dart';
+import 'package:ayodex/features/profile/presentation/screens/faq_screen.dart';
+import 'package:ayodex/features/profile/presentation/screens/contact_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: '/',
+    redirect: (context, state) => RouteGuards.evaluate(context, state, ref.read(authControllerProvider)),
     routes: [
       GoRoute(
         path: '/',
@@ -57,10 +84,58 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: 'complete-profile',
         builder: (context, state) => const CompleteProfileScreen(),
       ),
-      GoRoute(
-        path: '/dashboard',
-        name: 'dashboard',
-        builder: (context, state) => const _DashboardPlaceholderScreen(),
+      // Main Persistent Navigation Shell
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return AppShellScaffold(navigationShell: navigationShell);
+        },
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/dashboard',
+                name: 'dashboard',
+                builder: (context, state) => const DashboardScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/exchange/create',
+                name: 'exchange-create',
+                builder: (context, state) => const ExchangeCreateScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/transfer/new',
+                name: 'transfer-new',
+                builder: (context, state) => const TransferNewScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/transactions',
+                name: 'transactions',
+                builder: (context, state) => const TransactionsScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/profile',
+                name: 'profile',
+                builder: (context, state) => const ProfileScreen(),
+              ),
+            ],
+          ),
+        ],
       ),
       GoRoute(
         path: '/banned',
@@ -142,101 +217,144 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: 'kyc-status',
         builder: (context, state) => const KycStatusScreen(),
       ),
+      GoRoute(
+        path: '/exchange/preview',
+        name: 'exchange-preview',
+        builder: (context, state) {
+          final id = state.uri.queryParameters['id'] ?? (state.extra as Map<String, dynamic>?)?['id'] ?? '';
+          return ExchangePreviewScreen(exchangeId: id);
+        },
+      ),
+      GoRoute(
+        path: '/exchange/manual',
+        name: 'exchange-manual',
+        builder: (context, state) {
+          final id = state.uri.queryParameters['id'] ?? (state.extra as Map<String, dynamic>?)?['id'] ?? '';
+          return ExchangeManualPaymentScreen(exchangeId: id);
+        },
+      ),
+      GoRoute(
+        path: '/exchange/history',
+        name: 'exchange-history',
+        builder: (context, state) {
+          final scope = state.uri.queryParameters['scope'];
+          return ExchangeHistoryScreen(initialScope: scope);
+        },
+      ),
+      GoRoute(
+        path: '/exchange/details',
+        name: 'exchange-details',
+        builder: (context, state) {
+          final id = state.uri.queryParameters['id'] ?? (state.extra as Map<String, dynamic>?)?['id'] ?? '';
+          return ExchangeDetailScreen(exchangeId: id);
+        },
+      ),
+      GoRoute(
+        path: '/exchange/track',
+        name: 'exchange-track',
+        builder: (context, state) {
+          final id = state.uri.queryParameters['id'] ?? (state.extra as Map<String, dynamic>?)?['id'];
+          return ExchangeTrackScreen(initialExchangeId: id);
+        },
+      ),
+      GoRoute(
+        path: '/transfer/quote/:id',
+        name: 'transfer-quote',
+        builder: (context, state) {
+          final id = state.pathParameters['id'] ?? '';
+          return TransferQuotePreviewScreen(quoteId: id);
+        },
+      ),
+      GoRoute(
+        path: '/transfer/processing/:trx',
+        name: 'transfer-processing',
+        builder: (context, state) {
+          final trx = state.pathParameters['trx'] ?? '';
+          return TransferProcessingScreen(trx: trx);
+        },
+      ),
+      GoRoute(
+        path: '/transfer/history',
+        name: 'transfer-history',
+        builder: (context, state) => const TransferHistoryScreen(),
+      ),
+      GoRoute(
+        path: '/transfer/detail/:trx',
+        name: 'transfer-detail',
+        builder: (context, state) {
+          final trx = state.pathParameters['trx'] ?? '';
+          return TransferDetailScreen(trx: trx);
+        },
+      ),
+      GoRoute(
+        path: '/withdraw',
+        name: 'withdraw-methods',
+        builder: (context, state) => const WithdrawMethodsScreen(),
+      ),
+      GoRoute(
+        path: '/withdraw/history',
+        name: 'withdraw-history',
+        builder: (context, state) => const WithdrawHistoryScreen(),
+      ),
+      GoRoute(
+        path: '/support',
+        name: 'support-tickets',
+        builder: (context, state) => const SupportTicketsScreen(),
+      ),
+      GoRoute(
+        path: '/support/create',
+        name: 'support-create',
+        builder: (context, state) => const CreateTicketScreen(),
+      ),
+      GoRoute(
+        path: '/support/view/:ticket',
+        name: 'support-view',
+        builder: (context, state) {
+          final ticket = state.pathParameters['ticket'] ?? '';
+          return TicketViewScreen(ticketNumber: ticket);
+        },
+      ),
+      GoRoute(
+        path: '/notifications',
+        name: 'notifications',
+        builder: (context, state) => const NotificationsScreen(),
+      ),
+      GoRoute(
+        path: '/profile/change-password',
+        name: 'change-password',
+        builder: (context, state) => const ChangePasswordScreen(),
+      ),
+      GoRoute(
+        path: '/affiliate',
+        name: 'affiliate',
+        builder: (context, state) => const AffiliateScreen(),
+      ),
+      GoRoute(
+        path: '/policies',
+        name: 'policies',
+        builder: (context, state) => const PolicyScreen(),
+      ),
+      GoRoute(
+        path: '/policy/:slug',
+        name: 'policy-detail',
+        builder: (context, state) {
+          final slug = state.pathParameters['slug'];
+          return PolicyScreen(slug: slug);
+        },
+      ),
+      GoRoute(
+        path: '/faq',
+        name: 'faq',
+        builder: (context, state) => const FaqScreen(),
+      ),
+      GoRoute(
+        path: '/contact',
+        name: 'contact',
+        builder: (context, state) => const ContactScreen(),
+      ),
     ],
   );
 });
-
-class _DashboardPlaceholderScreen extends ConsumerWidget {
-  const _DashboardPlaceholderScreen();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final authState = ref.watch(authControllerProvider);
-    final user = authState.user;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dashboard'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout, color: AppColors.danger),
-            tooltip: 'Logout',
-            onPressed: () async {
-              await ref.read(authControllerProvider.notifier).logout();
-              if (context.mounted) {
-                context.go('/login');
-              }
-            },
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppDimensions.p16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              CustomCard(
-                title: 'Welcome to ${AppStrings.appName}',
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      user != null
-                          ? 'Logged in as ${user.fullName}'
-                          : 'Authenticated User',
-                      style: AppTextTheme.bodyMedium
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: AppDimensions.p12),
-                    if (user != null) ...[
-                      Text('Username: @${user.username}',
-                          style: AppTextTheme.bodyMedium),
-                      const SizedBox(height: 4),
-                      Text('Email: ${user.email}',
-                          style: AppTextTheme.bodyMedium),
-                      const SizedBox(height: 4),
-                      Text(
-                          'Country: ${user.countryName ?? "N/A"} (+${user.dialCode})',
-                          style: AppTextTheme.bodyMedium),
-                      const SizedBox(height: 4),
-                      Text('Mobile: ${user.mobile}',
-                          style: AppTextTheme.bodyMedium),
-                    ],
-                    const SizedBox(height: AppDimensions.p16),
-                    AppButton(
-                      text: 'Security & PIN',
-                      onPressed: () => context.push('/security/pin'),
-                    ),
-                    const SizedBox(height: AppDimensions.p12),
-                    AppButton(
-                      text: 'KYC Verification',
-                      variant: AppButtonVariant.secondary,
-                      onPressed: () => context.push('/kyc'),
-                    ),
-                    const SizedBox(height: AppDimensions.p12),
-                    AppButton(
-                      text: 'Log Out',
-                      variant: AppButtonVariant.outline,
-                      onPressed: () async {
-                        await ref
-                            .read(authControllerProvider.notifier)
-                            .logout();
-                        if (context.mounted) {
-                          context.go('/login');
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class _BannedScreen extends ConsumerWidget {
   const _BannedScreen();

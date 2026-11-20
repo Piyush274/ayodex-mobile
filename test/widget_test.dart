@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/main.dart';
 import 'package:ayodex/core/constants/app_strings.dart';
+import 'package:ayodex/core/models/user_model.dart';
 import 'package:ayodex/features/auth/presentation/controllers/auth_controller.dart';
 
 class FakeAuthController extends StateNotifier<AuthState> implements AuthController {
@@ -44,6 +45,9 @@ class FakeAuthController extends StateNotifier<AuthState> implements AuthControl
 
   @override
   void clearError() {}
+
+  @override
+  void setUser(UserModel user) {}
 }
 
 void main() {
@@ -56,6 +60,7 @@ void main() {
         child: const AyodexApp(),
       ),
     );
+    await tester.pump();
 
     expect(find.text(AppStrings.appName), findsWidgets);
     expect(find.text(AppStrings.appTagline), findsOneWidget);

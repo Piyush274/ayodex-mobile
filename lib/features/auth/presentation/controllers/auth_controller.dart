@@ -218,6 +218,10 @@ class AuthController extends StateNotifier<AuthState> {
   void clearError() {
     state = state.copyWith(errorMessage: null);
   }
+
+  void setUser(UserModel user) {
+    state = state.copyWith(user: user);
+  }
 }
 
 final authControllerProvider = StateNotifierProvider<AuthController, AuthState>((ref) {
