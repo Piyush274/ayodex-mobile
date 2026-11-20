@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
@@ -15,7 +15,8 @@ class VerifyResetCodeScreen extends ConsumerStatefulWidget {
   const VerifyResetCodeScreen({super.key, required this.email});
 
   @override
-  ConsumerState<VerifyResetCodeScreen> createState() => _VerifyResetCodeScreenState();
+  ConsumerState<VerifyResetCodeScreen> createState() =>
+      _VerifyResetCodeScreenState();
 }
 
 class _VerifyResetCodeScreenState extends ConsumerState<VerifyResetCodeScreen> {
@@ -64,7 +65,8 @@ class _VerifyResetCodeScreenState extends ConsumerState<VerifyResetCodeScreen> {
 
   Future<void> _handleVerify() async {
     if (_enteredCode.length < 6) {
-      setState(() => _errorMessage = 'Please enter all 6 digits of the verification code');
+      setState(() =>
+          _errorMessage = 'Please enter all 6 digits of the verification code');
       return;
     }
 
@@ -108,7 +110,8 @@ class _VerifyResetCodeScreenState extends ConsumerState<VerifyResetCodeScreen> {
       _startCooldown();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('A new verification code has been sent.')),
+          const SnackBar(
+              content: Text('A new verification code has been sent.')),
         );
       }
     } catch (e) {
@@ -138,7 +141,7 @@ class _VerifyResetCodeScreenState extends ConsumerState<VerifyResetCodeScreen> {
                   width: 80,
                   height: 80,
                   decoration: BoxDecoration(
-                    color: AppColors.info.withOpacity(0.12),
+                    color: AppColors.info.withValues(alpha: 0.12),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
@@ -167,19 +170,23 @@ class _VerifyResetCodeScreenState extends ConsumerState<VerifyResetCodeScreen> {
                 Container(
                   padding: const EdgeInsets.all(AppDimensions.p12),
                   decoration: BoxDecoration(
-                    color: AppColors.danger.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                    border: Border.all(color: AppColors.danger.withOpacity(0.3)),
+                    color: AppColors.danger.withValues(alpha: 0.1),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusMedium),
+                    border: Border.all(
+                        color: AppColors.danger.withValues(alpha: 0.3)),
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Icon(Icons.error_outline, color: AppColors.danger, size: 20),
+                      const Icon(Icons.error_outline,
+                          color: AppColors.danger, size: 20),
                       const SizedBox(width: AppDimensions.p8),
                       Expanded(
                         child: Text(
                           _errorMessage!,
-                          style: AppTextTheme.bodyMedium.copyWith(color: AppColors.danger),
+                          style: AppTextTheme.bodyMedium
+                              .copyWith(color: AppColors.danger),
                         ),
                       ),
                     ],
@@ -217,7 +224,8 @@ class _VerifyResetCodeScreenState extends ConsumerState<VerifyResetCodeScreen> {
                 child: _resendCooldown > 0
                     ? Text(
                         'Resend code in ${_resendCooldown}s',
-                        style: AppTextTheme.bodyMedium.copyWith(color: AppColors.textMuted),
+                        style: AppTextTheme.bodyMedium
+                            .copyWith(color: AppColors.textMuted),
                       )
                     : TextButton(
                         onPressed: _handleResendCode,

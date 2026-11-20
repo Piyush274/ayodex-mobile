@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
 import 'package:ayodex/core/constants/app_dimensions.dart';
 import 'package:ayodex/core/models/country_model.dart';
@@ -26,15 +26,23 @@ class _CountryPickerDialogState extends State<CountryPickerDialog> {
   void initState() {
     super.initState();
     // Prioritize Benin (BJ) and Nigeria (NG)
-    final priority = widget.countries.where((c) => c.countryCode == 'BJ' || c.countryCode == 'NG').toList();
-    final others = widget.countries.where((c) => c.countryCode != 'BJ' && c.countryCode != 'NG').toList();
+    final priority = widget.countries
+        .where((c) => c.countryCode == 'BJ' || c.countryCode == 'NG')
+        .toList();
+    final others = widget.countries
+        .where((c) => c.countryCode != 'BJ' && c.countryCode != 'NG')
+        .toList();
     _filteredCountries = [...priority, ...others];
   }
 
   void _filter(String query) {
     if (query.isEmpty) {
-      final priority = widget.countries.where((c) => c.countryCode == 'BJ' || c.countryCode == 'NG').toList();
-      final others = widget.countries.where((c) => c.countryCode != 'BJ' && c.countryCode != 'NG').toList();
+      final priority = widget.countries
+          .where((c) => c.countryCode == 'BJ' || c.countryCode == 'NG')
+          .toList();
+      final others = widget.countries
+          .where((c) => c.countryCode != 'BJ' && c.countryCode != 'NG')
+          .toList();
       setState(() => _filteredCountries = [...priority, ...others]);
       return;
     }
@@ -58,7 +66,8 @@ class _CountryPickerDialogState extends State<CountryPickerDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: const RoundedRectangleBorder(borderRadius: AppDimensions.borderRadiusCard),
+      shape: const RoundedRectangleBorder(
+          borderRadius: AppDimensions.borderRadiusCard),
       backgroundColor: AppColors.surface,
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxHeight: 520, maxWidth: 400),
@@ -70,7 +79,8 @@ class _CountryPickerDialogState extends State<CountryPickerDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Select Country', style: AppTextTheme.headingMedium),
+                  const Text('Select Country',
+                      style: AppTextTheme.headingMedium),
                   IconButton(
                     icon: const Icon(Icons.close, size: 20),
                     onPressed: () => Navigator.of(context).pop(),
@@ -84,7 +94,8 @@ class _CountryPickerDialogState extends State<CountryPickerDialog> {
                 decoration: const InputDecoration(
                   hintText: 'Search by country or code...',
                   prefixIcon: Icon(Icons.search, size: 20),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 ),
               ),
               const SizedBox(height: AppDimensions.p12),
@@ -94,17 +105,23 @@ class _CountryPickerDialogState extends State<CountryPickerDialog> {
                   separatorBuilder: (_, __) => const Divider(height: 1),
                   itemBuilder: (context, index) {
                     final item = _filteredCountries[index];
-                    final isPriority = item.countryCode == 'BJ' || item.countryCode == 'NG';
+                    final isPriority =
+                        item.countryCode == 'BJ' || item.countryCode == 'NG';
 
                     return ListTile(
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 2),
                       leading: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: isPriority ? AppColors.base.withOpacity(0.12) : AppColors.background,
+                          color: isPriority
+                              ? AppColors.base.withValues(alpha: 0.12)
+                              : AppColors.background,
                           borderRadius: BorderRadius.circular(4),
                           border: Border.all(
-                            color: isPriority ? AppColors.base : AppColors.border,
+                            color:
+                                isPriority ? AppColors.base : AppColors.border,
                           ),
                         ),
                         child: Text(
@@ -112,12 +129,15 @@ class _CountryPickerDialogState extends State<CountryPickerDialog> {
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
-                            color: isPriority ? AppColors.base : AppColors.heading,
+                            color:
+                                isPriority ? AppColors.base : AppColors.heading,
                           ),
                         ),
                       ),
                       title: Text(item.country, style: AppTextTheme.bodyLarge),
-                      trailing: Text('+${item.dialCode}', style: AppTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.w600)),
+                      trailing: Text('+${item.dialCode}',
+                          style: AppTextTheme.bodyMedium
+                              .copyWith(fontWeight: FontWeight.w600)),
                       onTap: () {
                         widget.onCountrySelected(item);
                         Navigator.of(context).pop();

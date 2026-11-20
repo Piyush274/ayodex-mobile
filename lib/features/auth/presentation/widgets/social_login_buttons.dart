@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
 import 'package:ayodex/core/constants/app_dimensions.dart';
 import 'package:ayodex/core/theme/text_theme.dart';
@@ -17,8 +17,8 @@ class SocialLoginButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: const [
+        const Row(
+          children: [
             Expanded(child: Divider()),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: AppDimensions.p12),
@@ -33,12 +33,17 @@ class SocialLoginButtons extends StatelessWidget {
             Expanded(
               child: OutlinedButton.icon(
                 onPressed: onGoogleTap,
-                icon: const Icon(Icons.g_mobiledata, size: 28, color: Colors.red),
-                label: const Text('Google', style: TextStyle(color: AppColors.heading, fontWeight: FontWeight.w600)),
+                icon:
+                    const Icon(Icons.g_mobiledata, size: 28, color: Colors.red),
+                label: const Text('Google',
+                    style: TextStyle(
+                        color: AppColors.heading, fontWeight: FontWeight.w600)),
                 style: OutlinedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(AppDimensions.buttonHeight),
+                  minimumSize:
+                      const Size.fromHeight(AppDimensions.buttonHeight),
                   side: const BorderSide(color: AppColors.border),
-                  shape: const RoundedRectangleBorder(borderRadius: AppDimensions.borderRadiusMedium),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: AppDimensions.borderRadiusMedium),
                 ),
               ),
             ),
@@ -46,12 +51,17 @@ class SocialLoginButtons extends StatelessWidget {
             Expanded(
               child: OutlinedButton.icon(
                 onPressed: onFacebookTap,
-                icon: const Icon(Icons.facebook, size: 22, color: Color(0xFF1877F2)),
-                label: const Text('Facebook', style: TextStyle(color: AppColors.heading, fontWeight: FontWeight.w600)),
+                icon: const Icon(Icons.facebook,
+                    size: 22, color: Color(0xFF1877F2)),
+                label: const Text('Facebook',
+                    style: TextStyle(
+                        color: AppColors.heading, fontWeight: FontWeight.w600)),
                 style: OutlinedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(AppDimensions.buttonHeight),
+                  minimumSize:
+                      const Size.fromHeight(AppDimensions.buttonHeight),
                   side: const BorderSide(color: AppColors.border),
-                  shape: const RoundedRectangleBorder(borderRadius: AppDimensions.borderRadiusMedium),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: AppDimensions.borderRadiusMedium),
                 ),
               ),
             ),

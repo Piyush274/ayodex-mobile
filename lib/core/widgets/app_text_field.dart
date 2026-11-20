@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_dimensions.dart';
@@ -88,7 +88,9 @@ class _AppTextFieldState extends State<AppTextField> {
                 ? IconButton(
                     key: const Key('password_visibility_toggle'),
                     icon: Icon(
-                      _obscured ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                      _obscured
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
                       color: AppColors.textMuted,
                       size: 20,
                     ),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -40,14 +40,14 @@ class _ChangePinScreenState extends ConsumerState<ChangePinScreen> {
     }
 
     final success = await ref.read(pinControllerProvider.notifier).changePin(
-      password: _passwordController.text,
-      currentPin: _currentPinController.text,
-      pin: _newPinController.text,
-      pinConfirmation: _newPinConfirmController.text,
-      authenticatorCode: _authenticatorController.text.trim().isEmpty
-          ? null
-          : _authenticatorController.text.trim(),
-    );
+          password: _passwordController.text,
+          currentPin: _currentPinController.text,
+          pin: _newPinController.text,
+          pinConfirmation: _newPinConfirmController.text,
+          authenticatorCode: _authenticatorController.text.trim().isEmpty
+              ? null
+              : _authenticatorController.text.trim(),
+        );
 
     if (mounted && success) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -81,7 +81,7 @@ class _ChangePinScreenState extends ConsumerState<ChangePinScreen> {
                     width: 72,
                     height: 72,
                     decoration: BoxDecoration(
-                      color: AppColors.info.withOpacity(0.12),
+                      color: AppColors.info.withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
@@ -98,7 +98,7 @@ class _ChangePinScreenState extends ConsumerState<ChangePinScreen> {
                   style: AppTextTheme.displayLarge.copyWith(fontSize: 24),
                 ),
                 const SizedBox(height: AppDimensions.p8),
-                Text(
+                const Text(
                   'Enter your current account credentials and specify your new 4 to 6 digit transaction PIN.',
                   textAlign: TextAlign.center,
                   style: AppTextTheme.bodyMedium,
@@ -110,19 +110,23 @@ class _ChangePinScreenState extends ConsumerState<ChangePinScreen> {
                   Container(
                     padding: const EdgeInsets.all(AppDimensions.p12),
                     decoration: BoxDecoration(
-                      color: AppColors.danger.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                      border: Border.all(color: AppColors.danger.withOpacity(0.3)),
+                      color: AppColors.danger.withValues(alpha: 0.1),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusMedium),
+                      border: Border.all(
+                          color: AppColors.danger.withValues(alpha: 0.3)),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.error_outline, color: AppColors.danger, size: 20),
+                        const Icon(Icons.error_outline,
+                            color: AppColors.danger, size: 20),
                         const SizedBox(width: AppDimensions.p8),
                         Expanded(
                           child: Text(
                             pinState.errorMessage!,
-                            style: AppTextTheme.bodyMedium.copyWith(color: AppColors.danger),
+                            style: AppTextTheme.bodyMedium
+                                .copyWith(color: AppColors.danger),
                           ),
                         ),
                       ],
@@ -138,7 +142,8 @@ class _ChangePinScreenState extends ConsumerState<ChangePinScreen> {
                   label: 'Account Password',
                   hint: 'Enter your account password',
                   isPassword: true,
-                  prefixIcon: const Icon(Icons.lock_outline, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.lock_outline,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Account password is required';
@@ -160,7 +165,8 @@ class _ChangePinScreenState extends ConsumerState<ChangePinScreen> {
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(6),
                   ],
-                  prefixIcon: const Icon(Icons.pin_outlined, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.pin_outlined,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Current PIN is required';
@@ -182,7 +188,8 @@ class _ChangePinScreenState extends ConsumerState<ChangePinScreen> {
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(6),
                   ],
-                  prefixIcon: const Icon(Icons.pin_outlined, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.pin_outlined,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'New PIN is required';
@@ -207,7 +214,8 @@ class _ChangePinScreenState extends ConsumerState<ChangePinScreen> {
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(6),
                   ],
-                  prefixIcon: const Icon(Icons.lock_reset_outlined, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.lock_reset_outlined,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'PIN confirmation is required';
@@ -232,7 +240,8 @@ class _ChangePinScreenState extends ConsumerState<ChangePinScreen> {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(6),
                     ],
-                    prefixIcon: const Icon(Icons.security, size: 20, color: AppColors.textMuted),
+                    prefixIcon: const Icon(Icons.security,
+                        size: 20, color: AppColors.textMuted),
                     validator: (value) {
                       if (requires2fa && (value == null || value.isEmpty)) {
                         return '2FA code is required';

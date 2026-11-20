@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_dimensions.dart';
 
@@ -34,16 +34,20 @@ class AppButton extends StatelessWidget {
 
     switch (variant) {
       case AppButtonVariant.primary:
-        backgroundColor = isEnabled ? AppColors.base : AppColors.base.withOpacity(0.5);
+        backgroundColor =
+            isEnabled ? AppColors.base : AppColors.base.withValues(alpha: 0.5);
         foregroundColor = Colors.white;
         break;
       case AppButtonVariant.secondary:
-        backgroundColor = isEnabled ? AppColors.accent : AppColors.accent.withOpacity(0.5);
+        backgroundColor = isEnabled
+            ? AppColors.accent
+            : AppColors.accent.withValues(alpha: 0.5);
         foregroundColor = Colors.white;
         break;
       case AppButtonVariant.outline:
         backgroundColor = Colors.transparent;
-        foregroundColor = isEnabled ? AppColors.base : AppColors.base.withOpacity(0.5);
+        foregroundColor =
+            isEnabled ? AppColors.base : AppColors.base.withValues(alpha: 0.5);
         borderSide = BorderSide(
           color: isEnabled ? AppColors.base : AppColors.border,
           width: 1.5,

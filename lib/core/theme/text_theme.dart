@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../constants/app_colors.dart';
 
 class AppTextTheme {
@@ -62,14 +62,14 @@ class AppTextTheme {
   );
 
   static TextTheme get textTheme => const TextTheme(
-    displayLarge: displayLarge,
-    headlineLarge: headingLarge,
-    headlineMedium: headingMedium,
-    headlineSmall: headingSmall,
-    bodyLarge: bodyLarge,
-    bodyMedium: bodyMedium,
-    bodySmall: bodySmall,
-    labelLarge: button,
-    labelSmall: caption,
-  );
+        displayLarge: displayLarge,
+        headlineLarge: headingLarge,
+        headlineMedium: headingMedium,
+        headlineSmall: headingSmall,
+        bodyLarge: bodyLarge,
+        bodyMedium: bodyMedium,
+        bodySmall: bodySmall,
+        labelLarge: button,
+        labelSmall: caption,
+      );
 }

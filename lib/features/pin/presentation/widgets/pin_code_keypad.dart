@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
 import 'package:ayodex/core/constants/app_dimensions.dart';
 import 'package:ayodex/core/theme/text_theme.dart';
@@ -163,7 +163,7 @@ class _PinCodeKeypadState extends State<PinCodeKeypad> {
           border: Border.all(color: AppColors.border),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.03),
+              color: Colors.black.withValues(alpha: 0.03),
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),

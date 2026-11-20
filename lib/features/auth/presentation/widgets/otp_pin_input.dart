@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
 import 'package:ayodex/core/constants/app_dimensions.dart';
@@ -122,14 +122,16 @@ class _OtpPinInputState extends State<OtpPinInput> {
                 contentPadding: const EdgeInsets.symmetric(vertical: 12),
                 filled: true,
                 fillColor: _controllers[index].text.isNotEmpty
-                    ? AppColors.base.withOpacity(0.06)
+                    ? AppColors.base.withValues(alpha: 0.06)
                     : AppColors.surface,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.radiusMedium),
                   borderSide: const BorderSide(color: AppColors.border),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.radiusMedium),
                   borderSide: BorderSide(
                     color: _controllers[index].text.isNotEmpty
                         ? AppColors.base
@@ -138,7 +140,8 @@ class _OtpPinInputState extends State<OtpPinInput> {
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.radiusMedium),
                   borderSide: const BorderSide(color: AppColors.base, width: 2),
                 ),
               ),

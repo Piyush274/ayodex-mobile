@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
 import 'package:ayodex/core/constants/app_dimensions.dart';
-import 'package:ayodex/core/constants/app_strings.dart';
 import 'package:ayodex/core/models/country_model.dart';
 import 'package:ayodex/core/theme/text_theme.dart';
 import 'package:ayodex/core/widgets/app_button.dart';
@@ -16,7 +15,8 @@ class CompleteProfileScreen extends ConsumerStatefulWidget {
   const CompleteProfileScreen({super.key});
 
   @override
-  ConsumerState<CompleteProfileScreen> createState() => _CompleteProfileScreenState();
+  ConsumerState<CompleteProfileScreen> createState() =>
+      _CompleteProfileScreenState();
 }
 
 class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
@@ -91,10 +91,18 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
       mobileCode: _selectedCountry!.dialCode,
       username: _usernameController.text.trim().toLowerCase(),
       mobile: _mobileController.text.trim(),
-      address: _addressController.text.trim().isEmpty ? null : _addressController.text.trim(),
-      city: _cityController.text.trim().isEmpty ? null : _cityController.text.trim(),
-      stateName: _stateController.text.trim().isEmpty ? null : _stateController.text.trim(),
-      zip: _zipController.text.trim().isEmpty ? null : _zipController.text.trim(),
+      address: _addressController.text.trim().isEmpty
+          ? null
+          : _addressController.text.trim(),
+      city: _cityController.text.trim().isEmpty
+          ? null
+          : _cityController.text.trim(),
+      stateName: _stateController.text.trim().isEmpty
+          ? null
+          : _stateController.text.trim(),
+      zip: _zipController.text.trim().isEmpty
+          ? null
+          : _zipController.text.trim(),
     );
 
     if (mounted && success) {
@@ -124,7 +132,8 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
               },
               child: Text(
                 'Logout',
-                style: AppTextTheme.bodyMedium.copyWith(color: AppColors.danger),
+                style:
+                    AppTextTheme.bodyMedium.copyWith(color: AppColors.danger),
               ),
             ),
           ],
@@ -142,7 +151,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                     style: AppTextTheme.displayLarge.copyWith(fontSize: 26),
                   ),
                   const SizedBox(height: AppDimensions.p8),
-                  Text(
+                  const Text(
                     'To comply with financial regulations and secure your wallet, please complete your profile details.',
                     style: AppTextTheme.bodyMedium,
                   ),
@@ -153,19 +162,23 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                     Container(
                       padding: const EdgeInsets.all(AppDimensions.p12),
                       decoration: BoxDecoration(
-                        color: AppColors.danger.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                        border: Border.all(color: AppColors.danger.withOpacity(0.3)),
+                        color: AppColors.danger.withValues(alpha: 0.1),
+                        borderRadius:
+                            BorderRadius.circular(AppDimensions.radiusMedium),
+                        border: Border.all(
+                            color: AppColors.danger.withValues(alpha: 0.3)),
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.error_outline, color: AppColors.danger, size: 20),
+                          const Icon(Icons.error_outline,
+                              color: AppColors.danger, size: 20),
                           const SizedBox(width: AppDimensions.p8),
                           Expanded(
                             child: Text(
                               authState.errorMessage!,
-                              style: AppTextTheme.bodyMedium.copyWith(color: AppColors.danger),
+                              style: AppTextTheme.bodyMedium
+                                  .copyWith(color: AppColors.danger),
                             ),
                           ),
                         ],
@@ -188,7 +201,8 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                     borderRadius: AppDimensions.borderRadiusMedium,
                     child: Container(
                       height: AppDimensions.inputHeight,
-                      padding: const EdgeInsets.symmetric(horizontal: AppDimensions.p16),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: AppDimensions.p16),
                       decoration: BoxDecoration(
                         border: Border.all(color: AppColors.border),
                         borderRadius: AppDimensions.borderRadiusMedium,
@@ -205,18 +219,21 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                             Expanded(
                               child: Text(
                                 '${_selectedCountry!.country} (+${_selectedCountry!.dialCode})',
-                                style: AppTextTheme.bodyLarge.copyWith(color: AppColors.heading),
+                                style: AppTextTheme.bodyLarge
+                                    .copyWith(color: AppColors.heading),
                               ),
                             ),
                           ] else ...[
                             Expanded(
                               child: Text(
                                 'Select your country',
-                                style: AppTextTheme.bodyLarge.copyWith(color: AppColors.textMuted),
+                                style: AppTextTheme.bodyLarge
+                                    .copyWith(color: AppColors.textMuted),
                               ),
                             ),
                           ],
-                          const Icon(Icons.keyboard_arrow_down, color: AppColors.textMuted),
+                          const Icon(Icons.keyboard_arrow_down,
+                              color: AppColors.textMuted),
                         ],
                       ),
                     ),
@@ -236,7 +253,9 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                       alignment: Alignment.center,
                       width: 60,
                       child: Text(
-                        _selectedCountry != null ? '+${_selectedCountry!.dialCode}' : '+',
+                        _selectedCountry != null
+                            ? '+${_selectedCountry!.dialCode}'
+                            : '+',
                         style: AppTextTheme.bodyMedium.copyWith(
                           fontWeight: FontWeight.bold,
                           color: AppColors.heading,
@@ -262,7 +281,8 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                     label: 'Username',
                     hint: 'e.g. john_doe',
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9_]')),
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r'[a-zA-Z0-9_]')),
                     ],
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {

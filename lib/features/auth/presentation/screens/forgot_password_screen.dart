@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
@@ -12,7 +12,8 @@ class ForgotPasswordScreen extends ConsumerStatefulWidget {
   const ForgotPasswordScreen({super.key});
 
   @override
-  ConsumerState<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  ConsumerState<ForgotPasswordScreen> createState() =>
+      _ForgotPasswordScreenState();
 }
 
 class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
@@ -79,7 +80,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: AppColors.base.withOpacity(0.12),
+                      color: AppColors.base.withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
@@ -96,7 +97,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                   style: AppTextTheme.displayLarge.copyWith(fontSize: 24),
                 ),
                 const SizedBox(height: AppDimensions.p8),
-                Text(
+                const Text(
                   'Enter your registered email address or username and we will send you a 6-digit verification code.',
                   textAlign: TextAlign.center,
                   style: AppTextTheme.bodyMedium,
@@ -108,19 +109,23 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                   Container(
                     padding: const EdgeInsets.all(AppDimensions.p12),
                     decoration: BoxDecoration(
-                      color: AppColors.danger.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                      border: Border.all(color: AppColors.danger.withOpacity(0.3)),
+                      color: AppColors.danger.withValues(alpha: 0.1),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusMedium),
+                      border: Border.all(
+                          color: AppColors.danger.withValues(alpha: 0.3)),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.error_outline, color: AppColors.danger, size: 20),
+                        const Icon(Icons.error_outline,
+                            color: AppColors.danger, size: 20),
                         const SizedBox(width: AppDimensions.p8),
                         Expanded(
                           child: Text(
                             _errorMessage!,
-                            style: AppTextTheme.bodyMedium.copyWith(color: AppColors.danger),
+                            style: AppTextTheme.bodyMedium
+                                .copyWith(color: AppColors.danger),
                           ),
                         ),
                       ],
@@ -136,7 +141,8 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                   label: 'Email or Username',
                   hint: 'Enter your email or username',
                   keyboardType: TextInputType.emailAddress,
-                  prefixIcon: const Icon(Icons.person_outline, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.person_outline,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Email or username is required';
@@ -158,7 +164,8 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.arrow_back, size: 16, color: AppColors.body),
+                    const Icon(Icons.arrow_back,
+                        size: 16, color: AppColors.body),
                     const SizedBox(width: 6),
                     GestureDetector(
                       onTap: () => context.pop(),

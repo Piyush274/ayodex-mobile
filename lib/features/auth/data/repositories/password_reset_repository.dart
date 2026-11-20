@@ -1,11 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/core/constants/api_endpoints.dart';
-import 'package:ayodex/core/network/api_client.dart';
 import 'package:ayodex/core/network/network_providers.dart';
 import 'package:ayodex/core/repositories/base_repository.dart';
 
 class PasswordResetRepository extends BaseRepository {
-  PasswordResetRepository(ApiClient apiClient) : super(apiClient);
+  PasswordResetRepository(super.apiClient);
 
   /// Step 1: Send verification code to email or username
   Future<String> sendResetCode(String value) async {
@@ -106,7 +105,8 @@ class PasswordResetRepository extends BaseRepository {
   }
 }
 
-final passwordResetRepositoryProvider = Provider<PasswordResetRepository>((ref) {
+final passwordResetRepositoryProvider =
+    Provider<PasswordResetRepository>((ref) {
   final apiClient = ref.watch(apiClientProvider);
   return PasswordResetRepository(apiClient);
 });

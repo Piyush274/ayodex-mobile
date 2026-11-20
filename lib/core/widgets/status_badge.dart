@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../constants/app_dimensions.dart';
 import '../theme/text_theme.dart';
 
@@ -22,10 +22,10 @@ class StatusBadge extends StatelessWidget {
         vertical: AppDimensions.p4,
       ),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.12),
+        color: color.withValues(alpha: 0.12),
         borderRadius: AppDimensions.borderRadiusPill,
         border: Border.all(
-          color: color.withOpacity(0.3),
+          color: color.withValues(alpha: 0.3),
           width: 1,
         ),
       ),

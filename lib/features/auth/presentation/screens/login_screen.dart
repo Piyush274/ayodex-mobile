@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
@@ -69,7 +69,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       } else {
         if (state.errorMessage != null &&
             (state.errorMessage!.contains('429') ||
-                state.errorMessage!.toLowerCase().contains('too many requests'))) {
+                state.errorMessage!
+                    .toLowerCase()
+                    .contains('too many requests'))) {
           _startCooldown(60);
         }
       }
@@ -100,7 +102,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   style: AppTextTheme.displayLarge.copyWith(fontSize: 28),
                 ),
                 const SizedBox(height: AppDimensions.p8),
-                Text(
+                const Text(
                   'Log in to your ${AppStrings.appName} account to manage exchanges, transfers, and wallet.',
                   style: AppTextTheme.bodyMedium,
                 ),
@@ -111,19 +113,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   Container(
                     padding: const EdgeInsets.all(AppDimensions.p12),
                     decoration: BoxDecoration(
-                      color: AppColors.danger.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                      border: Border.all(color: AppColors.danger.withOpacity(0.3)),
+                      color: AppColors.danger.withValues(alpha: 0.1),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusMedium),
+                      border: Border.all(
+                          color: AppColors.danger.withValues(alpha: 0.3)),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.error_outline, color: AppColors.danger, size: 20),
+                        const Icon(Icons.error_outline,
+                            color: AppColors.danger, size: 20),
                         const SizedBox(width: AppDimensions.p8),
                         Expanded(
                           child: Text(
                             authState.errorMessage!,
-                            style: AppTextTheme.bodyMedium.copyWith(color: AppColors.danger),
+                            style: AppTextTheme.bodyMedium
+                                .copyWith(color: AppColors.danger),
                           ),
                         ),
                       ],
@@ -137,18 +143,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   Container(
                     padding: const EdgeInsets.all(AppDimensions.p12),
                     decoration: BoxDecoration(
-                      color: AppColors.warning.withOpacity(0.12),
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                      border: Border.all(color: AppColors.warning.withOpacity(0.4)),
+                      color: AppColors.warning.withValues(alpha: 0.12),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusMedium),
+                      border: Border.all(
+                          color: AppColors.warning.withValues(alpha: 0.4)),
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.timer_outlined, color: AppColors.warning, size: 20),
+                        const Icon(Icons.timer_outlined,
+                            color: AppColors.warning, size: 20),
                         const SizedBox(width: AppDimensions.p8),
                         Expanded(
                           child: Text(
                             'Too many login attempts. Please wait $_cooldownSeconds seconds.',
-                            style: AppTextTheme.bodyMedium.copyWith(color: AppColors.warning),
+                            style: AppTextTheme.bodyMedium
+                                .copyWith(color: AppColors.warning),
                           ),
                         ),
                       ],
@@ -164,7 +174,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   label: 'Username or Email',
                   hint: 'Enter your username or email',
                   keyboardType: TextInputType.emailAddress,
-                  prefixIcon: const Icon(Icons.person_outline, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.person_outline,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Username or email is required';
@@ -181,7 +192,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   label: 'Password',
                   hint: 'Enter your password',
                   isPassword: true,
-                  prefixIcon: const Icon(Icons.lock_outline, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.lock_outline,
+                      size: 20, color: AppColors.textMuted),
                   textInputAction: TextInputAction.done,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -215,7 +227,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
                 // Sign In Button
                 AppButton(
-                  text: _cooldownSeconds > 0 ? 'Wait ($_cooldownSeconds s)' : 'Sign In',
+                  text: _cooldownSeconds > 0
+                      ? 'Wait ($_cooldownSeconds s)'
+                      : 'Sign In',
                   isLoading: authState.isLoading,
                   onPressed: _cooldownSeconds > 0 ? null : _handleLogin,
                 ),
@@ -225,12 +239,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 SocialLoginButtons(
                   onGoogleTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Google Sign-In integration ready.')),
+                      const SnackBar(
+                          content: Text('Google Sign-In integration ready.')),
                     );
                   },
                   onFacebookTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Facebook Sign-In integration ready.')),
+                      const SnackBar(
+                          content: Text('Facebook Sign-In integration ready.')),
                     );
                   },
                 ),
@@ -242,7 +258,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   children: [
                     Text(
                       "Don't have an account?",
-                      style: AppTextTheme.bodyMedium.copyWith(color: AppColors.body),
+                      style: AppTextTheme.bodyMedium
+                          .copyWith(color: AppColors.body),
                     ),
                     const SizedBox(width: 4),
                     GestureDetector(

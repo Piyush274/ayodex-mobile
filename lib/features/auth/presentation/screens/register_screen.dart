@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
@@ -40,7 +40,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   @override
   void initState() {
     super.initState();
-    _referralController = TextEditingController(text: widget.referralCode ?? '');
+    _referralController =
+        TextEditingController(text: widget.referralCode ?? '');
     _passwordController.addListener(_checkPasswordStrength);
   }
 
@@ -87,7 +88,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       password: _passwordController.text,
       passwordConfirmation: _passwordConfirmController.text,
       agree: _agreeToTerms,
-      reference: _referralController.text.trim().isEmpty ? null : _referralController.text.trim(),
+      reference: _referralController.text.trim().isEmpty
+          ? null
+          : _referralController.text.trim(),
     );
 
     if (mounted && success) {
@@ -118,7 +121,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   style: AppTextTheme.displayLarge.copyWith(fontSize: 28),
                 ),
                 const SizedBox(height: AppDimensions.p8),
-                Text(
+                const Text(
                   'Start exchanging crypto, fiat, and sending money across Benin & Nigeria.',
                   style: AppTextTheme.bodyMedium,
                 ),
@@ -129,19 +132,23 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   Container(
                     padding: const EdgeInsets.all(AppDimensions.p12),
                     decoration: BoxDecoration(
-                      color: AppColors.danger.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                      border: Border.all(color: AppColors.danger.withOpacity(0.3)),
+                      color: AppColors.danger.withValues(alpha: 0.1),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusMedium),
+                      border: Border.all(
+                          color: AppColors.danger.withValues(alpha: 0.3)),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.error_outline, color: AppColors.danger, size: 20),
+                        const Icon(Icons.error_outline,
+                            color: AppColors.danger, size: 20),
                         const SizedBox(width: AppDimensions.p8),
                         Expanded(
                           child: Text(
                             authState.errorMessage!,
-                            style: AppTextTheme.bodyMedium.copyWith(color: AppColors.danger),
+                            style: AppTextTheme.bodyMedium
+                                .copyWith(color: AppColors.danger),
                           ),
                         ),
                       ],
@@ -193,12 +200,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   label: 'Email Address',
                   hint: 'name@example.com',
                   keyboardType: TextInputType.emailAddress,
-                  prefixIcon: const Icon(Icons.mail_outline, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.mail_outline,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Email is required';
                     }
-                    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value.trim())) {
+                    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                        .hasMatch(value.trim())) {
                       return 'Enter a valid email address';
                     }
                     return null;
@@ -213,7 +222,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   label: 'Password',
                   hint: 'Enter strong password',
                   isPassword: true,
-                  prefixIcon: const Icon(Icons.lock_outline, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.lock_outline,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Password is required';
@@ -234,7 +244,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     _PasswordRuleChip(label: '6+ chars', valid: _hasMinLength),
                     _PasswordRuleChip(label: 'Uppercase', valid: _hasUppercase),
                     _PasswordRuleChip(label: 'Number', valid: _hasNumber),
-                    _PasswordRuleChip(label: 'Special (!@#)', valid: _hasSpecialChar),
+                    _PasswordRuleChip(
+                        label: 'Special (!@#)', valid: _hasSpecialChar),
                   ],
                 ),
                 const SizedBox(height: AppDimensions.p16),
@@ -246,7 +257,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   label: 'Confirm Password',
                   hint: 'Repeat your password',
                   isPassword: true,
-                  prefixIcon: const Icon(Icons.lock_reset_outlined, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.lock_reset_outlined,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Password confirmation is required';
@@ -265,7 +277,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   controller: _referralController,
                   label: 'Referral Code (Optional)',
                   hint: 'Enter referral code if any',
-                  prefixIcon: const Icon(Icons.card_giftcard_outlined, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.card_giftcard_outlined,
+                      size: 20, color: AppColors.textMuted),
                 ),
                 const SizedBox(height: AppDimensions.p16),
 
@@ -292,7 +305,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     Expanded(
                       child: Text(
                         'I agree to the Terms of Service, Privacy Policy and Fee Policy.',
-                        style: AppTextTheme.bodySmall.copyWith(color: AppColors.body),
+                        style: AppTextTheme.bodySmall
+                            .copyWith(color: AppColors.body),
                       ),
                     ),
                   ],
@@ -303,7 +317,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     padding: const EdgeInsets.only(left: 32),
                     child: Text(
                       'You must agree to the terms and privacy policy',
-                      style: AppTextTheme.bodySmall.copyWith(color: AppColors.danger),
+                      style: AppTextTheme.bodySmall
+                          .copyWith(color: AppColors.danger),
                     ),
                   ),
                 ],
@@ -321,12 +336,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 SocialLoginButtons(
                   onGoogleTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Google Sign-Up integration ready.')),
+                      const SnackBar(
+                          content: Text('Google Sign-Up integration ready.')),
                     );
                   },
                   onFacebookTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Facebook Sign-Up integration ready.')),
+                      const SnackBar(
+                          content: Text('Facebook Sign-Up integration ready.')),
                     );
                   },
                 ),
@@ -338,7 +355,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   children: [
                     Text(
                       'Already have an account?',
-                      style: AppTextTheme.bodyMedium.copyWith(color: AppColors.body),
+                      style: AppTextTheme.bodyMedium
+                          .copyWith(color: AppColors.body),
                     ),
                     const SizedBox(width: 4),
                     GestureDetector(
@@ -377,7 +395,9 @@ class _PasswordRuleChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: valid ? AppColors.success.withOpacity(0.12) : AppColors.surfaceSubtle,
+        color: valid
+            ? AppColors.success.withValues(alpha: 0.12)
+            : AppColors.surfaceSubtle,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: valid ? AppColors.success : AppColors.border,

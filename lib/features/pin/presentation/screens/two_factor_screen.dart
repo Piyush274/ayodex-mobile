@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
@@ -35,20 +35,24 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
 
     if (_otpCode.length < 6) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter all 6 digits of the authenticator code')),
+        const SnackBar(
+            content:
+                Text('Please enter all 6 digits of the authenticator code')),
       );
       return;
     }
 
-    final success = await ref.read(pinControllerProvider.notifier).enableTwoFactor(
-      key: twoFactor.secret,
-      code: _otpCode,
-    );
+    final success =
+        await ref.read(pinControllerProvider.notifier).enableTwoFactor(
+              key: twoFactor.secret,
+              code: _otpCode,
+            );
 
     if (mounted && success) {
       await ref.read(authControllerProvider.notifier).initialize();
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Two-factor authentication enabled successfully!')),
+        const SnackBar(
+            content: Text('Two-factor authentication enabled successfully!')),
       );
       setState(() => _otpCode = '');
     }
@@ -57,17 +61,22 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
   Future<void> _handleDisable2fa() async {
     if (_otpCode.length < 6) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter all 6 digits of the authenticator code')),
+        const SnackBar(
+            content:
+                Text('Please enter all 6 digits of the authenticator code')),
       );
       return;
     }
 
-    final success = await ref.read(pinControllerProvider.notifier).disableTwoFactor(_otpCode);
+    final success = await ref
+        .read(pinControllerProvider.notifier)
+        .disableTwoFactor(_otpCode);
 
     if (mounted && success) {
       await ref.read(authControllerProvider.notifier).initialize();
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Two-factor authentication disabled successfully!')),
+        const SnackBar(
+            content: Text('Two-factor authentication disabled successfully!')),
       );
       setState(() => _otpCode = '');
     }
@@ -87,7 +96,8 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
       ),
       body: SafeArea(
         child: pinState.isLoading && twoFactor == null
-            ? const Center(child: CircularProgressIndicator(color: AppColors.base))
+            ? const Center(
+                child: CircularProgressIndicator(color: AppColors.base))
             : SingleChildScrollView(
                 padding: const EdgeInsets.all(AppDimensions.p20),
                 child: Column(
@@ -98,19 +108,23 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
                       Container(
                         padding: const EdgeInsets.all(AppDimensions.p12),
                         decoration: BoxDecoration(
-                          color: AppColors.danger.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                          border: Border.all(color: AppColors.danger.withOpacity(0.3)),
+                          color: AppColors.danger.withValues(alpha: 0.1),
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radiusMedium),
+                          border: Border.all(
+                              color: AppColors.danger.withValues(alpha: 0.3)),
                         ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.error_outline, color: AppColors.danger, size: 20),
+                            const Icon(Icons.error_outline,
+                                color: AppColors.danger, size: 20),
                             const SizedBox(width: AppDimensions.p8),
                             Expanded(
                               child: Text(
                                 pinState.errorMessage!,
-                                style: AppTextTheme.bodyMedium.copyWith(color: AppColors.danger),
+                                style: AppTextTheme.bodyMedium
+                                    .copyWith(color: AppColors.danger),
                               ),
                             ),
                           ],
@@ -124,18 +138,22 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
                       Container(
                         padding: const EdgeInsets.all(AppDimensions.p12),
                         decoration: BoxDecoration(
-                          color: AppColors.success.withOpacity(0.12),
-                          borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                          border: Border.all(color: AppColors.success.withOpacity(0.4)),
+                          color: AppColors.success.withValues(alpha: 0.12),
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radiusMedium),
+                          border: Border.all(
+                              color: AppColors.success.withValues(alpha: 0.4)),
                         ),
                         child: Row(
                           children: [
-                            const Icon(Icons.check_circle_outline, color: AppColors.success, size: 20),
+                            const Icon(Icons.check_circle_outline,
+                                color: AppColors.success, size: 20),
                             const SizedBox(width: AppDimensions.p8),
                             Expanded(
                               child: Text(
                                 pinState.successMessage!,
-                                style: AppTextTheme.bodyMedium.copyWith(color: AppColors.success),
+                                style: AppTextTheme.bodyMedium
+                                    .copyWith(color: AppColors.success),
                               ),
                             ),
                           ],
@@ -155,7 +173,7 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Use Google Authenticator to add an extra layer of security. Scan the QR code or manually enter the setup key below.',
                               style: AppTextTheme.bodyMedium,
                             ),
@@ -171,10 +189,12 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
                             ),
                             const SizedBox(height: AppDimensions.p8),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 14, vertical: 12),
                               decoration: BoxDecoration(
                                 color: AppColors.background,
-                                borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+                                borderRadius: BorderRadius.circular(
+                                    AppDimensions.radiusMedium),
                                 border: Border.all(color: AppColors.border),
                               ),
                               child: Row(
@@ -190,22 +210,28 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
                                     ),
                                   ),
                                   IconButton(
-                                    icon: const Icon(Icons.copy, size: 20, color: AppColors.base),
+                                    icon: const Icon(Icons.copy,
+                                        size: 20, color: AppColors.base),
                                     tooltip: 'Copy Key',
-                                    onPressed: twoFactor?.secret.isNotEmpty == true
-                                        ? () {
-                                            Clipboard.setData(ClipboardData(text: twoFactor!.secret));
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                              const SnackBar(content: Text('Secret key copied to clipboard')),
-                                            );
-                                          }
-                                        : null,
+                                    onPressed:
+                                        twoFactor?.secret.isNotEmpty == true
+                                            ? () {
+                                                Clipboard.setData(ClipboardData(
+                                                    text: twoFactor!.secret));
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                      content: Text(
+                                                          'Secret key copied to clipboard')),
+                                                );
+                                              }
+                                            : null,
                                   ),
                                 ],
                               ),
                             ),
                             const SizedBox(height: 8),
-                            Text(
+                            const Text(
                               'If entering manually, type the key into Google Authenticator without spaces.',
                               style: AppTextTheme.caption,
                             ),
@@ -222,7 +248,8 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
                             const SizedBox(height: AppDimensions.p12),
                             OtpPinInput(
                               length: 6,
-                              onChanged: (val) => setState(() => _otpCode = val),
+                              onChanged: (val) =>
+                                  setState(() => _otpCode = val),
                               onCompleted: (val) {
                                 setState(() => _otpCode = val);
                                 _handleEnable2fa();
@@ -232,7 +259,9 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
                             AppButton(
                               text: 'Enable 2FA',
                               isLoading: pinState.isLoading,
-                              onPressed: _otpCode.length == 6 ? _handleEnable2fa : null,
+                              onPressed: _otpCode.length == 6
+                                  ? _handleEnable2fa
+                                  : null,
                             ),
                           ],
                         ),
@@ -249,7 +278,7 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Your account is currently protected with Google Authenticator 2FA. To disable it, enter a 6-digit code from your app.',
                               style: AppTextTheme.bodyMedium,
                             ),
@@ -264,7 +293,8 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
                             const SizedBox(height: AppDimensions.p12),
                             OtpPinInput(
                               length: 6,
-                              onChanged: (val) => setState(() => _otpCode = val),
+                              onChanged: (val) =>
+                                  setState(() => _otpCode = val),
                               onCompleted: (val) {
                                 setState(() => _otpCode = val);
                                 _handleDisable2fa();
@@ -275,7 +305,9 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
                               text: 'Disable 2FA',
                               variant: AppButtonVariant.outline,
                               isLoading: pinState.isLoading,
-                              onPressed: _otpCode.length == 6 ? _handleDisable2fa : null,
+                              onPressed: _otpCode.length == 6
+                                  ? _handleDisable2fa
+                                  : null,
                             ),
                           ],
                         ),

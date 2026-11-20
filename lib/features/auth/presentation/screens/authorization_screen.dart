@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
@@ -21,7 +21,8 @@ class AuthorizationScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<AuthorizationScreen> createState() => _AuthorizationScreenState();
+  ConsumerState<AuthorizationScreen> createState() =>
+      _AuthorizationScreenState();
 }
 
 class _AuthorizationScreenState extends ConsumerState<AuthorizationScreen> {
@@ -139,13 +140,15 @@ class _AuthorizationScreenState extends ConsumerState<AuthorizationScreen> {
 
     try {
       final repo = ref.read(passwordResetRepositoryProvider);
-      final resendType = widget.type == AuthorizationType.email ? 'email' : 'sms';
+      final resendType =
+          widget.type == AuthorizationType.email ? 'email' : 'sms';
       await repo.resendVerify(resendType);
       _startCooldown();
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Verification code resent successfully.')),
+          const SnackBar(
+              content: Text('Verification code resent successfully.')),
         );
       }
     } catch (e) {
@@ -187,7 +190,7 @@ class _AuthorizationScreenState extends ConsumerState<AuthorizationScreen> {
                   width: 80,
                   height: 80,
                   decoration: BoxDecoration(
-                    color: AppColors.base.withOpacity(0.12),
+                    color: AppColors.base.withValues(alpha: 0.12),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
@@ -216,19 +219,23 @@ class _AuthorizationScreenState extends ConsumerState<AuthorizationScreen> {
                 Container(
                   padding: const EdgeInsets.all(AppDimensions.p12),
                   decoration: BoxDecoration(
-                    color: AppColors.danger.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                    border: Border.all(color: AppColors.danger.withOpacity(0.3)),
+                    color: AppColors.danger.withValues(alpha: 0.1),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusMedium),
+                    border: Border.all(
+                        color: AppColors.danger.withValues(alpha: 0.3)),
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Icon(Icons.error_outline, color: AppColors.danger, size: 20),
+                      const Icon(Icons.error_outline,
+                          color: AppColors.danger, size: 20),
                       const SizedBox(width: AppDimensions.p8),
                       Expanded(
                         child: Text(
                           _errorMessage!,
-                          style: AppTextTheme.bodyMedium.copyWith(color: AppColors.danger),
+                          style: AppTextTheme.bodyMedium
+                              .copyWith(color: AppColors.danger),
                         ),
                       ),
                     ],
@@ -267,7 +274,8 @@ class _AuthorizationScreenState extends ConsumerState<AuthorizationScreen> {
                   child: _resendCooldown > 0
                       ? Text(
                           'Resend code in ${_resendCooldown}s',
-                          style: AppTextTheme.bodyMedium.copyWith(color: AppColors.textMuted),
+                          style: AppTextTheme.bodyMedium
+                              .copyWith(color: AppColors.textMuted),
                         )
                       : TextButton(
                           onPressed: _handleResend,

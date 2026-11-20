@@ -1,13 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/core/constants/api_endpoints.dart';
-import 'package:ayodex/core/network/api_client.dart';
 import 'package:ayodex/core/network/network_providers.dart';
 import 'package:ayodex/core/repositories/base_repository.dart';
 import '../models/pin_status_model.dart';
 import '../models/two_factor_model.dart';
 
 class PinRepository extends BaseRepository {
-  PinRepository(ApiClient apiClient) : super(apiClient);
+  PinRepository(super.apiClient);
 
   /// Get current PIN status (has_pin, is_locked, remaining minutes, requires_2fa)
   Future<PinStatusModel> getPinStatus() async {

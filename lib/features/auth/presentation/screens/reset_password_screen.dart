@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
@@ -19,7 +19,8 @@ class ResetPasswordScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+  ConsumerState<ResetPasswordScreen> createState() =>
+      _ResetPasswordScreenState();
 }
 
 class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
@@ -110,7 +111,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: AppColors.success.withOpacity(0.12),
+                      color: AppColors.success.withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
@@ -127,7 +128,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
                   style: AppTextTheme.displayLarge.copyWith(fontSize: 24),
                 ),
                 const SizedBox(height: AppDimensions.p8),
-                Text(
+                const Text(
                   'Please enter and confirm your new secure password.',
                   textAlign: TextAlign.center,
                   style: AppTextTheme.bodyMedium,
@@ -139,19 +140,23 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
                   Container(
                     padding: const EdgeInsets.all(AppDimensions.p12),
                     decoration: BoxDecoration(
-                      color: AppColors.danger.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                      border: Border.all(color: AppColors.danger.withOpacity(0.3)),
+                      color: AppColors.danger.withValues(alpha: 0.1),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusMedium),
+                      border: Border.all(
+                          color: AppColors.danger.withValues(alpha: 0.3)),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.error_outline, color: AppColors.danger, size: 20),
+                        const Icon(Icons.error_outline,
+                            color: AppColors.danger, size: 20),
                         const SizedBox(width: AppDimensions.p8),
                         Expanded(
                           child: Text(
                             _errorMessage!,
-                            style: AppTextTheme.bodyMedium.copyWith(color: AppColors.danger),
+                            style: AppTextTheme.bodyMedium
+                                .copyWith(color: AppColors.danger),
                           ),
                         ),
                       ],
@@ -167,7 +172,8 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
                   label: 'New Password',
                   hint: 'Enter new password',
                   isPassword: true,
-                  prefixIcon: const Icon(Icons.lock_outline, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.lock_outline,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Password is required';
@@ -187,7 +193,8 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
                   label: 'Confirm New Password',
                   hint: 'Confirm new password',
                   isPassword: true,
-                  prefixIcon: const Icon(Icons.lock_reset_outlined, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.lock_reset_outlined,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Confirm password is required';

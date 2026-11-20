@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
@@ -38,7 +38,8 @@ class _PinStatusScreenState extends ConsumerState<PinStatusScreen> {
       ),
       body: SafeArea(
         child: pinState.isLoading && status == null
-            ? const Center(child: CircularProgressIndicator(color: AppColors.base))
+            ? const Center(
+                child: CircularProgressIndicator(color: AppColors.base))
             : SingleChildScrollView(
                 padding: const EdgeInsets.all(AppDimensions.p20),
                 child: Column(
@@ -49,14 +50,17 @@ class _PinStatusScreenState extends ConsumerState<PinStatusScreen> {
                       Container(
                         padding: const EdgeInsets.all(AppDimensions.p16),
                         decoration: BoxDecoration(
-                          color: AppColors.danger.withOpacity(0.12),
-                          borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                          border: Border.all(color: AppColors.danger.withOpacity(0.4)),
+                          color: AppColors.danger.withValues(alpha: 0.12),
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radiusMedium),
+                          border: Border.all(
+                              color: AppColors.danger.withValues(alpha: 0.4)),
                         ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.lock_clock_outlined, color: AppColors.danger, size: 28),
+                            const Icon(Icons.lock_clock_outlined,
+                                color: AppColors.danger, size: 28),
                             const SizedBox(width: AppDimensions.p12),
                             Expanded(
                               child: Column(
@@ -72,7 +76,8 @@ class _PinStatusScreenState extends ConsumerState<PinStatusScreen> {
                                   const SizedBox(height: 4),
                                   Text(
                                     'Your transaction PIN has been temporarily locked due to excessive incorrect attempts. It will unlock automatically in ${status!.lockoutRemainingMinutes} minute(s).',
-                                    style: AppTextTheme.bodyMedium.copyWith(color: AppColors.danger),
+                                    style: AppTextTheme.bodyMedium
+                                        .copyWith(color: AppColors.danger),
                                   ),
                                 ],
                               ),
@@ -87,9 +92,14 @@ class _PinStatusScreenState extends ConsumerState<PinStatusScreen> {
                     CustomCard(
                       title: 'Transaction PIN',
                       trailing: StatusBadge(
-                        label: status?.hasPin == true ? 'Configured' : 'Not Set',
-                        color: status?.hasPin == true ? AppColors.success : AppColors.warning,
-                        icon: status?.hasPin == true ? Icons.check_circle : Icons.warning_amber_rounded,
+                        label:
+                            status?.hasPin == true ? 'Configured' : 'Not Set',
+                        color: status?.hasPin == true
+                            ? AppColors.success
+                            : AppColors.warning,
+                        icon: status?.hasPin == true
+                            ? Icons.check_circle
+                            : Icons.warning_amber_rounded,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,12 +134,13 @@ class _PinStatusScreenState extends ConsumerState<PinStatusScreen> {
                     // Two-Factor Authentication Card
                     CustomCard(
                       title: 'Two-Factor Authentication',
-                      trailing: const Icon(Icons.chevron_right, color: AppColors.textMuted),
+                      trailing: const Icon(Icons.chevron_right,
+                          color: AppColors.textMuted),
                       onTap: () => context.push('/security/2fa'),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Add an extra layer of defense using Google Authenticator codes for logins and transactions.',
                             style: AppTextTheme.bodyMedium,
                           ),
@@ -144,7 +155,8 @@ class _PinStatusScreenState extends ConsumerState<PinStatusScreen> {
                                 ),
                               ),
                               const SizedBox(width: 4),
-                              const Icon(Icons.arrow_forward, size: 14, color: AppColors.base),
+                              const Icon(Icons.arrow_forward,
+                                  size: 14, color: AppColors.base),
                             ],
                           ),
                         ],

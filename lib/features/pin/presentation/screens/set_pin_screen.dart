@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -38,17 +38,18 @@ class _SetPinScreenState extends ConsumerState<SetPinScreen> {
     }
 
     final success = await ref.read(pinControllerProvider.notifier).setPin(
-      password: _passwordController.text,
-      pin: _pinController.text,
-      pinConfirmation: _pinConfirmController.text,
-      authenticatorCode: _authenticatorController.text.trim().isEmpty
-          ? null
-          : _authenticatorController.text.trim(),
-    );
+          password: _passwordController.text,
+          pin: _pinController.text,
+          pinConfirmation: _pinConfirmController.text,
+          authenticatorCode: _authenticatorController.text.trim().isEmpty
+              ? null
+              : _authenticatorController.text.trim(),
+        );
 
     if (mounted && success) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Transaction PIN configured successfully!')),
+        const SnackBar(
+            content: Text('Transaction PIN configured successfully!')),
       );
       context.pop();
     }
@@ -78,7 +79,7 @@ class _SetPinScreenState extends ConsumerState<SetPinScreen> {
                     width: 72,
                     height: 72,
                     decoration: BoxDecoration(
-                      color: AppColors.base.withOpacity(0.12),
+                      color: AppColors.base.withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
@@ -95,7 +96,7 @@ class _SetPinScreenState extends ConsumerState<SetPinScreen> {
                   style: AppTextTheme.displayLarge.copyWith(fontSize: 24),
                 ),
                 const SizedBox(height: AppDimensions.p8),
-                Text(
+                const Text(
                   'Your 4 to 6 digit PIN is required to authorize all future transfers and withdrawals.',
                   textAlign: TextAlign.center,
                   style: AppTextTheme.bodyMedium,
@@ -107,19 +108,23 @@ class _SetPinScreenState extends ConsumerState<SetPinScreen> {
                   Container(
                     padding: const EdgeInsets.all(AppDimensions.p12),
                     decoration: BoxDecoration(
-                      color: AppColors.danger.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                      border: Border.all(color: AppColors.danger.withOpacity(0.3)),
+                      color: AppColors.danger.withValues(alpha: 0.1),
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusMedium),
+                      border: Border.all(
+                          color: AppColors.danger.withValues(alpha: 0.3)),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.error_outline, color: AppColors.danger, size: 20),
+                        const Icon(Icons.error_outline,
+                            color: AppColors.danger, size: 20),
                         const SizedBox(width: AppDimensions.p8),
                         Expanded(
                           child: Text(
                             pinState.errorMessage!,
-                            style: AppTextTheme.bodyMedium.copyWith(color: AppColors.danger),
+                            style: AppTextTheme.bodyMedium
+                                .copyWith(color: AppColors.danger),
                           ),
                         ),
                       ],
@@ -135,7 +140,8 @@ class _SetPinScreenState extends ConsumerState<SetPinScreen> {
                   label: 'Account Password',
                   hint: 'Enter your current account password',
                   isPassword: true,
-                  prefixIcon: const Icon(Icons.lock_outline, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.lock_outline,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Account password is required';
@@ -157,7 +163,8 @@ class _SetPinScreenState extends ConsumerState<SetPinScreen> {
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(6),
                   ],
-                  prefixIcon: const Icon(Icons.pin_outlined, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.pin_outlined,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'PIN is required';
@@ -182,7 +189,8 @@ class _SetPinScreenState extends ConsumerState<SetPinScreen> {
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(6),
                   ],
-                  prefixIcon: const Icon(Icons.lock_reset_outlined, size: 20, color: AppColors.textMuted),
+                  prefixIcon: const Icon(Icons.lock_reset_outlined,
+                      size: 20, color: AppColors.textMuted),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'PIN confirmation is required';
@@ -207,7 +215,8 @@ class _SetPinScreenState extends ConsumerState<SetPinScreen> {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(6),
                     ],
-                    prefixIcon: const Icon(Icons.security, size: 20, color: AppColors.textMuted),
+                    prefixIcon: const Icon(Icons.security,
+                        size: 20, color: AppColors.textMuted),
                     validator: (value) {
                       if (requires2fa && (value == null || value.isEmpty)) {
                         return '2FA code is required';

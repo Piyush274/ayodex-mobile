@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
@@ -51,7 +51,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                 borderRadius: BorderRadius.circular(22),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.base.withOpacity(0.35),
+                    color: AppColors.base.withValues(alpha: 0.35),
                     offset: const Offset(0, 10),
                     blurRadius: 20,
                   ),
@@ -69,9 +69,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               ),
             ),
             const SizedBox(height: AppDimensions.p24),
-            Text(AppStrings.appName, style: AppTextTheme.displayLarge),
+            const Text(AppStrings.appName, style: AppTextTheme.displayLarge),
             const SizedBox(height: AppDimensions.p8),
-            Text(AppStrings.appTagline, style: AppTextTheme.bodyMedium),
+            const Text(AppStrings.appTagline, style: AppTextTheme.bodyMedium),
             const SizedBox(height: AppDimensions.p40),
             const SizedBox(
               width: 24,

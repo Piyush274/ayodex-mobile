@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
 import 'package:ayodex/core/constants/app_dimensions.dart';
-import 'package:ayodex/core/constants/app_strings.dart';
 import 'package:ayodex/core/theme/text_theme.dart';
 import 'package:ayodex/core/widgets/app_button.dart';
 
@@ -65,7 +64,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 setState(() => _selectedLanguage = val);
               },
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   border: Border.all(color: AppColors.border),
                   borderRadius: BorderRadius.circular(20),
@@ -73,7 +73,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.language, size: 16, color: AppColors.heading),
+                    const Icon(Icons.language,
+                        size: 16, color: AppColors.heading),
                     const SizedBox(width: 6),
                     Text(
                       _selectedLanguage,
@@ -106,7 +107,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 itemBuilder: (context, index) {
                   final slide = _slides[index];
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: AppDimensions.p24),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: AppDimensions.p24),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -115,7 +117,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           width: 140,
                           height: 140,
                           decoration: BoxDecoration(
-                            color: slide.highlightColor.withOpacity(0.12),
+                            color: slide.highlightColor.withValues(alpha: 0.12),
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
@@ -159,7 +161,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   width: _currentPage == index ? 24 : 8,
                   height: 8,
                   decoration: BoxDecoration(
-                    color: _currentPage == index ? AppColors.base : AppColors.border,
+                    color: _currentPage == index
+                        ? AppColors.base
+                        : AppColors.border,
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
@@ -168,7 +172,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             const SizedBox(height: AppDimensions.p32),
             // Action Buttons
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppDimensions.p24),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppDimensions.p24),
               child: Column(
                 children: [
                   AppButton(
