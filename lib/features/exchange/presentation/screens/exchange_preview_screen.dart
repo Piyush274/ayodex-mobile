@@ -121,7 +121,7 @@ class _ExchangePreviewScreenState extends ConsumerState<ExchangePreviewScreen> {
                         const SizedBox(height: AppDimensions.p20),
 
                         // Destination Type Selection
-                        Text('Choose Destination', style: AppTextTheme.headingMedium),
+                        const Text('Choose Destination', style: AppTextTheme.headingMedium),
                         const SizedBox(height: 8),
                         RadioListTile<String>(
                           title: const Text('AYODEX Internal Wallet'),
@@ -146,7 +146,7 @@ class _ExchangePreviewScreenState extends ConsumerState<ExchangePreviewScreen> {
                         // Dynamic Form for External Destination
                         if (_destinationType == 'external') ...[
                           if (preview?.requiredData != null && preview!.requiredData!.fields.isNotEmpty) ...[
-                            Text('Recipient Details', style: AppTextTheme.headingMedium),
+                            const Text('Recipient Details', style: AppTextTheme.headingMedium),
                             const SizedBox(height: 12),
                             DynamicFormBuilder(
                               formKey: _formKey,

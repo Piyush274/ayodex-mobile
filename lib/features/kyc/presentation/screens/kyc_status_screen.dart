@@ -62,7 +62,7 @@ class KycStatusScreen extends ConsumerWidget {
                         style: AppTextTheme.headingLarge.copyWith(fontSize: 22),
                       ),
                       const SizedBox(height: AppDimensions.p8),
-                      Text(
+                      const Text(
                         'Full account access is active. You can now execute currency exchanges, bank transfers, and withdrawals without limits.',
                         style: AppTextTheme.bodyMedium,
                       ),
@@ -100,7 +100,7 @@ class KycStatusScreen extends ConsumerWidget {
                         style: AppTextTheme.headingLarge.copyWith(fontSize: 22),
                       ),
                       const SizedBox(height: AppDimensions.p8),
-                      Text(
+                      const Text(
                         'Your submitted documents are currently being reviewed by our compliance officers. Review typically takes 15 to 30 minutes.',
                         style: AppTextTheme.bodyMedium,
                       ),
@@ -139,7 +139,7 @@ class KycStatusScreen extends ConsumerWidget {
                         style: AppTextTheme.headingLarge.copyWith(fontSize: 22),
                       ),
                       const SizedBox(height: AppDimensions.p8),
-                      Text(
+                      const Text(
                         'Financial regulations require identity verification before participating in currency exchanges or making withdrawals.',
                         style: AppTextTheme.bodyMedium,
                       ),

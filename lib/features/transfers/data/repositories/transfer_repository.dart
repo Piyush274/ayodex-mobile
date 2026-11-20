@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:decimal/decimal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/core/constants/api_endpoints.dart';
-import 'package:ayodex/core/network/api_client.dart';
 import 'package:ayodex/core/network/network_providers.dart';
 import 'package:ayodex/core/models/paginated_response.dart';
 import 'package:ayodex/core/repositories/base_repository.dart';
@@ -11,7 +10,7 @@ import '../models/transfer_model.dart';
 import '../models/transfer_quote_model.dart';
 
 class TransferRepository extends BaseRepository {
-  TransferRepository(ApiClient apiClient) : super(apiClient);
+  TransferRepository(super.apiClient);
 
   Future<List<BankModel>> getBanks() async {
     final response = await handleApiCall(() async {

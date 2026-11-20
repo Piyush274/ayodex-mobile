@@ -101,7 +101,7 @@ class ExchangeCalculationBox extends StatelessWidget {
               Text('You Receive (Est.)', style: AppTextTheme.headingMedium.copyWith(fontSize: 16)),
               Text(
                 '${_finalReceiveAmount.toStringAsFixed(2)} ${receiveCurrency.curSym}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w900,
                   color: AppColors.success,

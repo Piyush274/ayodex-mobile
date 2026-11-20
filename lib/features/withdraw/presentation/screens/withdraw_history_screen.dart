@@ -166,7 +166,7 @@ class _WithdrawHistoryScreenState extends ConsumerState<WithdrawHistoryScreen> {
                             children: [
                               const Icon(Icons.account_balance_wallet_outlined, size: 64, color: AppColors.textMuted),
                               const SizedBox(height: 16),
-                              Text('No withdrawals found', style: AppTextTheme.bodyLarge),
+                              const Text('No withdrawals found', style: AppTextTheme.bodyLarge),
                               const SizedBox(height: 8),
                               Text('Your past withdrawals will appear here', style: AppTextTheme.caption.copyWith(color: AppColors.textMuted)),
                             ],

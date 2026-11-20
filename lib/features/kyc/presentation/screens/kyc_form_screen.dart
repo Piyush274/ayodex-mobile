@@ -93,7 +93,7 @@ class _KycFormScreenState extends ConsumerState<KycFormScreen> {
                                   style: AppTextTheme.headingMedium.copyWith(fontSize: 16),
                                 ),
                                 const SizedBox(height: 4),
-                                Text(
+                                const Text(
                                   'Verify your identity to unlock currency exchanges, transfers, and withdrawals across Benin & Nigeria.',
                                   style: AppTextTheme.bodyMedium,
                                 ),
@@ -145,7 +145,7 @@ class _KycFormScreenState extends ConsumerState<KycFormScreen> {
                         onPressed: _handleSubmit,
                       ),
                     ] else ...[
-                      Center(
+                      const Center(
                         child: Text(
                           'No verification documents required at this time.',
                           style: AppTextTheme.bodyMedium,

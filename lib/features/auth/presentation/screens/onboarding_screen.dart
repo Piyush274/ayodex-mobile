@@ -1,4 +1,4 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
 import 'package:ayodex/core/constants/app_dimensions.dart';
@@ -88,7 +88,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
               itemBuilder: (context) => [
                 const PopupMenuItem(value: 'EN', child: Text('English (EN)')),
-                const PopupMenuItem(value: 'FR', child: Text('Français (FR)')),
+                const PopupMenuItem(value: 'FR', child: Text('FranÃ§ais (FR)')),
               ],
             ),
           ),

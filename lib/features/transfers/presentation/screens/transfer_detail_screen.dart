@@ -82,7 +82,7 @@ class _TransferDetailScreenState extends ConsumerState<TransferDetailScreen> {
                     children: [
                       const Icon(Icons.error_outline, size: 48, color: AppColors.danger),
                       const SizedBox(height: 16),
-                      Text('Error loading transfer receipt', style: AppTextTheme.bodyLarge),
+                      const Text('Error loading transfer receipt', style: AppTextTheme.bodyLarge),
                       const SizedBox(height: 8),
                       Text(_errorMessage!, style: AppTextTheme.caption.copyWith(color: AppColors.textMuted)),
                       const SizedBox(height: 16),

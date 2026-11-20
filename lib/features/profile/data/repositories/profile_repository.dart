@@ -1,12 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/core/constants/api_endpoints.dart';
 import 'package:ayodex/core/models/user_model.dart';
-import 'package:ayodex/core/network/api_client.dart';
 import 'package:ayodex/core/network/network_providers.dart';
 import 'package:ayodex/core/repositories/base_repository.dart';
 
 class ProfileRepository extends BaseRepository {
-  ProfileRepository(ApiClient apiClient) : super(apiClient);
+  ProfileRepository(super.apiClient);
 
   Future<UserModel> updateProfile({
     required String firstname,

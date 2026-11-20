@@ -7,7 +7,6 @@ import 'package:ayodex/core/constants/app_dimensions.dart';
 import 'package:ayodex/core/theme/text_theme.dart';
 import 'package:ayodex/core/widgets/custom_card.dart';
 import 'package:ayodex/core/widgets/status_badge.dart';
-import 'package:ayodex/features/support/data/models/ticket_model.dart';
 import 'package:ayodex/features/support/presentation/controllers/ticket_controller.dart';
 
 class SupportTicketsScreen extends ConsumerStatefulWidget {
@@ -81,7 +80,7 @@ class _SupportTicketsScreenState extends ConsumerState<SupportTicketsScreen> {
                       children: [
                         const Icon(Icons.support_agent_outlined, size: 64, color: AppColors.textMuted),
                         const SizedBox(height: 16),
-                        Text('No support tickets', style: AppTextTheme.bodyLarge),
+                        const Text('No support tickets', style: AppTextTheme.bodyLarge),
                         const SizedBox(height: 8),
                         Text(
                           'Need help? Open a new ticket anytime.',

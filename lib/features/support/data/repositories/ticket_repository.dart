@@ -2,14 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/core/constants/api_endpoints.dart';
 import 'package:ayodex/core/models/paginated_response.dart';
-import 'package:ayodex/core/network/api_client.dart';
 import 'package:ayodex/core/network/network_providers.dart';
 import 'package:ayodex/core/repositories/base_repository.dart';
 import 'package:ayodex/core/widgets/file_upload_card.dart';
 import '../models/ticket_model.dart';
 
 class TicketRepository extends BaseRepository {
-  TicketRepository(ApiClient apiClient) : super(apiClient);
+  TicketRepository(super.apiClient);
 
   Future<PaginatedResponse<TicketModel>> getTickets({int page = 1}) async {
     final response = await handleApiCall(() async {

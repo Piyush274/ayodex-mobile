@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:decimal/decimal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/core/constants/api_endpoints.dart';
-import 'package:ayodex/core/network/api_client.dart';
 import 'package:ayodex/core/network/api_exceptions.dart';
 import 'package:ayodex/core/network/network_providers.dart';
 import 'package:ayodex/core/models/paginated_response.dart';
@@ -23,7 +22,7 @@ class WithdrawMethodsResponse {
 }
 
 class WithdrawRepository extends BaseRepository {
-  WithdrawRepository(ApiClient apiClient) : super(apiClient);
+  WithdrawRepository(super.apiClient);
 
   Future<WithdrawMethodsResponse> getWithdrawMethods() async {
     try {

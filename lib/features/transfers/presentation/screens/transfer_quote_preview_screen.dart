@@ -89,7 +89,7 @@ class _TransferQuotePreviewScreenState extends ConsumerState<TransferQuotePrevie
             children: [
               const Icon(Icons.info_outline, size: 48, color: AppColors.textMuted),
               const SizedBox(height: 16),
-              Text('Quote details not found', style: AppTextTheme.bodyLarge),
+              const Text('Quote details not found', style: AppTextTheme.bodyLarge),
               const SizedBox(height: 16),
               AppButton(
                 text: 'Back to Transfer',

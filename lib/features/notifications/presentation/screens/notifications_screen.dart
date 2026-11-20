@@ -121,7 +121,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                       children: [
                         const Icon(Icons.notifications_none, size: 64, color: AppColors.textMuted),
                         const SizedBox(height: 16),
-                        Text('No notifications', style: AppTextTheme.bodyLarge),
+                        const Text('No notifications', style: AppTextTheme.bodyLarge),
                         const SizedBox(height: 8),
                         Text('You are all caught up!', style: AppTextTheme.caption.copyWith(color: AppColors.textMuted)),
                       ],

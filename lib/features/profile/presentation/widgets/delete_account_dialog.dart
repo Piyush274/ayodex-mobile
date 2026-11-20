@@ -59,8 +59,8 @@ class _DeleteAccountDialogState extends ConsumerState<DeleteAccountDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.radiusCard)),
-      title: Row(
-        children: const [
+      title: const Row(
+        children: [
           Icon(Icons.warning_amber_rounded, color: AppColors.danger, size: 28),
           SizedBox(width: 8),
           Text('Delete Account?'),

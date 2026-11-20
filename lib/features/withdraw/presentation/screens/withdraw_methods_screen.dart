@@ -72,8 +72,8 @@ class _WithdrawMethodsScreenState extends ConsumerState<WithdrawMethodsScreen> {
         barrierDismissible: false,
         builder: (ctx) => AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.radiusCard)),
-          title: Row(
-            children: const [
+          title: const Row(
+            children: [
               Icon(Icons.check_circle, color: AppColors.success, size: 28),
               SizedBox(width: 8),
               Text('Withdrawal Submitted'),

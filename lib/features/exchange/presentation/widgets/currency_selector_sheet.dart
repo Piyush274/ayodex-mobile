@@ -88,7 +88,7 @@ class _CurrencySelectorSheetState extends State<CurrencySelectorSheet> {
             const SizedBox(height: AppDimensions.p16),
             Expanded(
               child: _filtered.isEmpty
-                  ? Center(
+                  ? const Center(
                       child: Text('No matching currencies found', style: AppTextTheme.bodyMedium),
                     )
                   : ListView.separated(

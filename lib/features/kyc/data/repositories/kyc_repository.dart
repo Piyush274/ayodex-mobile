@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/core/constants/api_endpoints.dart';
 import 'package:ayodex/core/models/dynamic_form_model.dart';
-import 'package:ayodex/core/network/api_client.dart';
 import 'package:ayodex/core/network/network_providers.dart';
 import 'package:ayodex/core/repositories/base_repository.dart';
 import 'package:ayodex/core/widgets/file_upload_card.dart';
@@ -22,7 +21,7 @@ class KycFormResult {
 }
 
 class KycRepository extends BaseRepository {
-  KycRepository(ApiClient apiClient) : super(apiClient);
+  KycRepository(super.apiClient);
 
   /// Fetch dynamic KYC schema or check status
   Future<KycFormResult> getKycForm() async {

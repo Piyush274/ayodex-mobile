@@ -2,22 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:decimal/decimal.dart';
-import 'package:ayodex/core/constants/app_colors.dart';
-import 'package:ayodex/core/localization/app_localizations.dart';
-import 'package:ayodex/core/localization/localization_repository.dart';
 import 'package:ayodex/core/models/user_model.dart';
-import 'package:ayodex/core/network/api_client.dart';
-import 'package:ayodex/core/services/preferences_service.dart';
 import 'package:ayodex/core/services/secure_storage_service.dart';
 import 'package:ayodex/core/widgets/app_button.dart';
 import 'package:ayodex/core/widgets/empty_state_view.dart';
 import 'package:ayodex/core/widgets/language_selector_sheet.dart';
-import 'package:ayodex/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:ayodex/features/dashboard/data/models/dashboard_model.dart';
 import 'package:ayodex/features/transfers/data/models/bank_model.dart';
 import 'package:ayodex/features/transfers/data/models/transfer_model.dart';
 import 'package:ayodex/features/transfers/data/models/transfer_quote_model.dart';
-import 'package:ayodex/features/transfers/presentation/widgets/transfer_status_timeline.dart';
 import 'package:ayodex/features/wallet/data/models/transaction_model.dart';
 
 void main() {

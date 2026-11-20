@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/core/constants/api_endpoints.dart';
 import 'package:ayodex/core/models/language_model.dart';
-import 'package:ayodex/core/network/api_client.dart';
 import 'package:ayodex/core/network/network_providers.dart';
 import 'package:ayodex/core/repositories/base_repository.dart';
 import 'package:ayodex/core/services/preferences_service.dart';
@@ -19,8 +18,7 @@ final localizationRepositoryProvider = Provider<LocalizationRepository>((ref) {
 class LocalizationRepository extends BaseRepository {
   final PreferencesService _preferencesService;
 
-  LocalizationRepository(ApiClient apiClient, this._preferencesService)
-      : super(apiClient);
+  LocalizationRepository(super.apiClient, this._preferencesService);
 
   String getSavedLanguageCode() {
     return _preferencesService.getLanguageCode();

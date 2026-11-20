@@ -19,7 +19,7 @@ class ExchangeSummaryRow extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Exchange Overview', style: AppTextTheme.headingMedium),
+        const Text('Exchange Overview', style: AppTextTheme.headingMedium),
         const SizedBox(height: AppDimensions.p12),
         Row(
           children: [

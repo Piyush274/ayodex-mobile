@@ -44,7 +44,7 @@ class _TransactionFilterSheetState extends State<TransactionFilterSheet> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Filter by Remark', style: AppTextTheme.headingMedium),
+              const Text('Filter by Remark', style: AppTextTheme.headingMedium),
               IconButton(
                 icon: const Icon(Icons.close, size: 20),
                 onPressed: () => Navigator.of(context).pop(),
@@ -53,8 +53,8 @@ class _TransactionFilterSheetState extends State<TransactionFilterSheet> {
           ),
           const SizedBox(height: AppDimensions.p16),
           if (widget.availableRemarks.isEmpty)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppDimensions.p20),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: AppDimensions.p20),
               child: Center(
                 child: Text('No specific remarks available', style: AppTextTheme.bodyMedium),
               ),

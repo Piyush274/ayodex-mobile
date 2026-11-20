@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
 import 'package:ayodex/core/constants/app_dimensions.dart';
 import 'package:ayodex/core/theme/text_theme.dart';
-import 'package:ayodex/core/widgets/status_badge.dart';
 import 'package:ayodex/features/auth/presentation/controllers/auth_controller.dart';
 import '../controllers/dashboard_controller.dart';
 import '../widgets/exchange_summary_row.dart';

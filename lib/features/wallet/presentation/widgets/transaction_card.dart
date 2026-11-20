@@ -80,7 +80,7 @@ class TransactionCard extends StatelessWidget {
                         ),
                         if (transaction.createdAt != null) ...[
                           const SizedBox(width: 6),
-                          Text('•', style: AppTextTheme.caption),
+                          const Text('•', style: AppTextTheme.caption),
                           const SizedBox(width: 6),
                           Text(
                             DateFormat('dd MMM, HH:mm').format(transaction.createdAt!),

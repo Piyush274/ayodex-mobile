@@ -1,9 +1,8 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
 import 'package:ayodex/core/constants/app_dimensions.dart';
-import 'package:ayodex/core/constants/app_strings.dart';
 import 'package:ayodex/core/theme/text_theme.dart';
 import 'package:ayodex/core/widgets/app_button.dart';
 import 'package:ayodex/core/widgets/app_shell_scaffold.dart';

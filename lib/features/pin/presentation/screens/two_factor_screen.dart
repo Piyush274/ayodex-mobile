@@ -1,4 +1,4 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
@@ -50,6 +50,7 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
 
     if (mounted && success) {
       await ref.read(authControllerProvider.notifier).initialize();
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             content: Text('Two-factor authentication enabled successfully!')),
@@ -74,6 +75,7 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
 
     if (mounted && success) {
       await ref.read(authControllerProvider.notifier).initialize();
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             content: Text('Two-factor authentication disabled successfully!')),

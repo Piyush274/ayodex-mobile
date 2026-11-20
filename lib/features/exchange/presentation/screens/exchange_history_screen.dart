@@ -7,7 +7,6 @@ import 'package:ayodex/core/constants/app_dimensions.dart';
 import 'package:ayodex/core/theme/text_theme.dart';
 import 'package:ayodex/core/widgets/status_badge.dart';
 import '../controllers/exchange_controller.dart';
-import 'package:ayodex/features/exchange/data/models/exchange_model.dart';
 
 class ExchangeHistoryScreen extends ConsumerStatefulWidget {
   final String? initialScope;
@@ -161,7 +160,7 @@ class _ExchangeHistoryScreenState extends ConsumerState<ExchangeHistoryScreen>
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text('Send', style: AppTextTheme.caption),
+                                        const Text('Send', style: AppTextTheme.caption),
                                         Text('${item.sendingAmount}', style: AppTextTheme.bodyLarge.copyWith(fontWeight: FontWeight.bold)),
                                       ],
                                     ),
@@ -169,7 +168,7 @@ class _ExchangeHistoryScreenState extends ConsumerState<ExchangeHistoryScreen>
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.end,
                                       children: [
-                                        Text('Receive', style: AppTextTheme.caption),
+                                        const Text('Receive', style: AppTextTheme.caption),
                                         Text('${item.totalReceivedAmount}', style: AppTextTheme.bodyLarge.copyWith(fontWeight: FontWeight.bold, color: AppColors.success)),
                                       ],
                                     ),

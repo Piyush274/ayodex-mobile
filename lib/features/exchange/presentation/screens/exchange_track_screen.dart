@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
 import 'package:ayodex/core/constants/app_dimensions.dart';
 import 'package:ayodex/core/theme/text_theme.dart';
-import 'package:ayodex/core/widgets/app_button.dart';
 import 'package:ayodex/core/widgets/custom_card.dart';
 import 'package:ayodex/core/widgets/status_badge.dart';
 import 'package:ayodex/features/exchange/data/repositories/exchange_repository.dart';
@@ -85,7 +84,7 @@ class _ExchangeTrackScreenState extends ConsumerState<ExchangeTrackScreen> {
                 style: AppTextTheme.displayLarge.copyWith(fontSize: 22),
               ),
               const SizedBox(height: 6),
-              Text(
+              const Text(
                 'Enter your unique Exchange ID to see real-time execution progress.',
                 style: AppTextTheme.bodyMedium,
               ),
@@ -140,7 +139,7 @@ class _ExchangeTrackScreenState extends ConsumerState<ExchangeTrackScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _StepItem(
+                      const _StepItem(
                         title: 'Order Placed',
                         subtitle: 'Exchange order registered in the system',
                         isCompleted: true,

@@ -107,7 +107,7 @@ class _WalletBalanceCardState extends State<WalletBalanceCard> {
                 const SizedBox(width: 8),
                 Text(
                   widget.currencySymbol,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: AppColors.baseLight,

@@ -52,7 +52,7 @@ class RecentActivityList extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Recent Activity', style: AppTextTheme.headingMedium),
+            const Text('Recent Activity', style: AppTextTheme.headingMedium),
             if (exchanges.isNotEmpty)
               Text(
                 'Latest ${exchanges.length}',

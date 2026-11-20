@@ -1,4 +1,4 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 
 /// Design tokens derived from active AYODEX website template `orange_oasis`
 class AppColors {

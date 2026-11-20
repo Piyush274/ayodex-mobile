@@ -20,8 +20,6 @@ dependencies:
   decimal: ^2.3.3
   uuid: ^4.4.0
   intl: ^0.20.2
-
-  material_ui: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

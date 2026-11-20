@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/core/constants/api_endpoints.dart';
 import 'package:ayodex/core/models/paginated_response.dart';
-import 'package:ayodex/core/network/api_client.dart';
 import 'package:ayodex/core/network/network_providers.dart';
 import 'package:ayodex/core/repositories/base_repository.dart';
 import '../models/transaction_model.dart';
@@ -17,7 +16,7 @@ class TransactionPageResult {
 }
 
 class TransactionRepository extends BaseRepository {
-  TransactionRepository(ApiClient apiClient) : super(apiClient);
+  TransactionRepository(super.apiClient);
 
   Future<TransactionPageResult> getTransactions({
     int page = 1,
@@ -65,7 +64,7 @@ class TransactionRepository extends BaseRepository {
       return TransactionPageResult(paginated: paginated, remarks: remarks);
     }
 
-    return TransactionPageResult(
+    return const TransactionPageResult(
       paginated: PaginatedResponse<TransactionModel>(data: [], currentPage: 1, total: 0),
     );
   }

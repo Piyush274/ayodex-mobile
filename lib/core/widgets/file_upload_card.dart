@@ -93,7 +93,7 @@ class _FileUploadCardState extends State<FileUploadCard> {
                   ),
                 ),
                 if (widget.isRequired)
-                  Text(
+                  const Text(
                     ' *',
                     style: TextStyle(color: AppColors.danger, fontWeight: FontWeight.bold),
                   ),

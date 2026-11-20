@@ -110,7 +110,7 @@ class _TransferHistoryScreenState extends ConsumerState<TransferHistoryScreen> {
                             children: [
                               const Icon(Icons.receipt_long_outlined, size: 64, color: AppColors.textMuted),
                               const SizedBox(height: 16),
-                              Text('No transfer history found', style: AppTextTheme.bodyLarge),
+                              const Text('No transfer history found', style: AppTextTheme.bodyLarge),
                               const SizedBox(height: 8),
                               Text(
                                 'Your payout transfers will appear here',
