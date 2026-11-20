@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/features/auth/presentation/screens/forgot_password_screen.dart';
@@ -23,7 +23,8 @@ void main() {
   });
 
   group('OtpPinInput Widget Tests', () {
-    testWidgets('OtpPinInput renders 6 input boxes and captures 6 digits', (tester) async {
+    testWidgets('OtpPinInput renders 6 input boxes and captures 6 digits',
+        (tester) async {
       String capturedCode = '';
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
@@ -62,8 +63,10 @@ void main() {
 
       expect(find.text('Password is required'), findsOneWidget);
 
-      await tester.enterText(find.byKey(const Key('reset_new_password')), 'Password123');
-      await tester.enterText(find.byKey(const Key('reset_confirm_password')), 'Password456');
+      await tester.enterText(
+          find.byKey(const Key('reset_new_password')), 'Password123');
+      await tester.enterText(
+          find.byKey(const Key('reset_confirm_password')), 'Password456');
 
       await tester.tap(find.text('Reset Password'));
       await tester.pumpAndSettle();

@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
-import 'package:ayodex/core/constants/app_dimensions.dart';
 import 'package:ayodex/core/constants/api_endpoints.dart';
 import 'package:ayodex/core/theme/app_theme.dart';
 import 'package:ayodex/core/widgets/app_button.dart';
@@ -10,14 +9,14 @@ import 'package:ayodex/core/widgets/status_badge.dart';
 void main() {
   group('Theme & Constants Unit Tests', () {
     test('AppColors matches orange_oasis website palette', () {
-      expect(AppColors.base.value, 0xFFFF6033);
-      expect(AppColors.accent.value, 0xFF110226);
-      expect(AppColors.heading.value, 0xFF353A69);
-      expect(AppColors.body.value, 0xFF515E80);
-      expect(AppColors.background.value, 0xFFF7F9FC);
-      expect(AppColors.border.value, 0xFFEBEBEB);
-      expect(AppColors.success.value, 0xFF28C76F);
-      expect(AppColors.danger.value, 0xFFEA5455);
+      expect(AppColors.base.toARGB32(), 0xFFFF6033);
+      expect(AppColors.accent.toARGB32(), 0xFF110226);
+      expect(AppColors.heading.toARGB32(), 0xFF353A69);
+      expect(AppColors.body.toARGB32(), 0xFF515E80);
+      expect(AppColors.background.toARGB32(), 0xFFF7F9FC);
+      expect(AppColors.border.toARGB32(), 0xFFEBEBEB);
+      expect(AppColors.success.toARGB32(), 0xFF28C76F);
+      expect(AppColors.danger.toARGB32(), 0xFFEA5455);
     });
 
     test('ApiEndpoints base URL and paths are accurately defined', () {
@@ -52,7 +51,8 @@ void main() {
       expect(tapped, isTrue);
     });
 
-    testWidgets('StatusBadge displays label and correct background', (tester) async {
+    testWidgets('StatusBadge displays label and correct background',
+        (tester) async {
       await tester.pumpWidget(const MaterialApp(
         home: Scaffold(
           body: StatusBadge(

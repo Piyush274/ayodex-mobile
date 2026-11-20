@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ayodex/core/constants/app_colors.dart';
@@ -21,6 +21,8 @@ import 'package:ayodex/features/pin/presentation/screens/pin_status_screen.dart'
 import 'package:ayodex/features/pin/presentation/screens/set_pin_screen.dart';
 import 'package:ayodex/features/pin/presentation/screens/change_pin_screen.dart';
 import 'package:ayodex/features/pin/presentation/screens/two_factor_screen.dart';
+import 'package:ayodex/features/kyc/presentation/screens/kyc_form_screen.dart';
+import 'package:ayodex/features/kyc/presentation/screens/kyc_status_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -45,7 +47,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: '/register',
         name: 'register',
         builder: (context, state) {
-          final refCode = state.uri.queryParameters['ref'] ?? state.uri.queryParameters['reference'];
+          final refCode = state.uri.queryParameters['ref'] ??
+              state.uri.queryParameters['reference'];
           return RegisterScreen(referralCode: refCode);
         },
       ),
@@ -74,7 +77,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: 'verify-reset-code',
         builder: (context, state) {
           final extra = state.extra as Map<String, dynamic>?;
-          final email = extra?['email'] ?? state.uri.queryParameters['email'] ?? '';
+          final email =
+              extra?['email'] ?? state.uri.queryParameters['email'] ?? '';
           return VerifyResetCodeScreen(email: email);
         },
       ),
@@ -83,8 +87,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: 'reset-password',
         builder: (context, state) {
           final extra = state.extra as Map<String, dynamic>?;
-          final email = extra?['email'] ?? state.uri.queryParameters['email'] ?? '';
-          final token = extra?['token'] ?? state.uri.queryParameters['token'] ?? '';
+          final email =
+              extra?['email'] ?? state.uri.queryParameters['email'] ?? '';
+          final token =
+              extra?['token'] ?? state.uri.queryParameters['token'] ?? '';
           return ResetPasswordScreen(email: email, token: token);
         },
       ),
@@ -93,7 +99,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: 'authorization',
         builder: (context, state) {
           final extra = state.extra as Map<String, dynamic>?;
-          final typeString = extra?['type'] ?? state.uri.queryParameters['type'] ?? 'email';
+          final typeString =
+              extra?['type'] ?? state.uri.queryParameters['type'] ?? 'email';
           AuthorizationType type;
           if (typeString == 'sms') {
             type = AuthorizationType.sms;
@@ -124,6 +131,16 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: '/security/2fa',
         name: 'security-2fa',
         builder: (context, state) => const TwoFactorScreen(),
+      ),
+      GoRoute(
+        path: '/kyc',
+        name: 'kyc',
+        builder: (context, state) => const KycFormScreen(),
+      ),
+      GoRoute(
+        path: '/kyc/status',
+        name: 'kyc-status',
+        builder: (context, state) => const KycStatusScreen(),
       ),
     ],
   );
@@ -165,18 +182,26 @@ class _DashboardPlaceholderScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      user != null ? 'Logged in as ${user.fullName}' : 'Authenticated User',
-                      style: AppTextTheme.bodyMedium.copyWith(fontWeight: FontWeight.bold),
+                      user != null
+                          ? 'Logged in as ${user.fullName}'
+                          : 'Authenticated User',
+                      style: AppTextTheme.bodyMedium
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: AppDimensions.p12),
                     if (user != null) ...[
-                      Text('Username: @${user.username}', style: AppTextTheme.bodyMedium),
+                      Text('Username: @${user.username}',
+                          style: AppTextTheme.bodyMedium),
                       const SizedBox(height: 4),
-                      Text('Email: ${user.email}', style: AppTextTheme.bodyMedium),
+                      Text('Email: ${user.email}',
+                          style: AppTextTheme.bodyMedium),
                       const SizedBox(height: 4),
-                      Text('Country: ${user.countryName ?? "N/A"} (+${user.dialCode})', style: AppTextTheme.bodyMedium),
+                      Text(
+                          'Country: ${user.countryName ?? "N/A"} (+${user.dialCode})',
+                          style: AppTextTheme.bodyMedium),
                       const SizedBox(height: 4),
-                      Text('Mobile: ${user.mobile}', style: AppTextTheme.bodyMedium),
+                      Text('Mobile: ${user.mobile}',
+                          style: AppTextTheme.bodyMedium),
                     ],
                     const SizedBox(height: AppDimensions.p16),
                     AppButton(
@@ -185,10 +210,18 @@ class _DashboardPlaceholderScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: AppDimensions.p12),
                     AppButton(
+                      text: 'KYC Verification',
+                      variant: AppButtonVariant.secondary,
+                      onPressed: () => context.push('/kyc'),
+                    ),
+                    const SizedBox(height: AppDimensions.p12),
+                    AppButton(
                       text: 'Log Out',
                       variant: AppButtonVariant.outline,
                       onPressed: () async {
-                        await ref.read(authControllerProvider.notifier).logout();
+                        await ref
+                            .read(authControllerProvider.notifier)
+                            .logout();
                         if (context.mounted) {
                           context.go('/login');
                         }
@@ -218,14 +251,16 @@ class _BannedScreen extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.block_flipped, size: 72, color: AppColors.danger),
+              const Icon(Icons.block_flipped,
+                  size: 72, color: AppColors.danger),
               const SizedBox(height: AppDimensions.p24),
               Text(
                 'Account Suspended',
-                style: AppTextTheme.displayLarge.copyWith(fontSize: 24, color: AppColors.danger),
+                style: AppTextTheme.displayLarge
+                    .copyWith(fontSize: 24, color: AppColors.danger),
               ),
               const SizedBox(height: AppDimensions.p12),
-              Text(
+              const Text(
                 'Your account has been deactivated or banned. Please reach out to customer support for assistance.',
                 textAlign: TextAlign.center,
                 style: AppTextTheme.bodyMedium,

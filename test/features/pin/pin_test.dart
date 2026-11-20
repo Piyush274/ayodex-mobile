@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/features/pin/presentation/widgets/pin_code_keypad.dart';
@@ -7,7 +7,9 @@ import 'package:ayodex/features/pin/presentation/screens/change_pin_screen.dart'
 
 void main() {
   group('PinCodeKeypad Widget Tests', () {
-    testWidgets('Keypad registers digits and triggers callback upon reaching length', (tester) async {
+    testWidgets(
+        'Keypad registers digits and triggers callback upon reaching length',
+        (tester) async {
       String enteredPin = '';
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_dimensions.dart';
 import 'text_theme.dart';
@@ -49,25 +49,25 @@ class AppTheme {
         ),
         hintStyle: AppTextTheme.bodyMedium.copyWith(color: AppColors.textMuted),
         labelStyle: AppTextTheme.bodyMedium.copyWith(color: AppColors.heading),
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderRadius: AppDimensions.borderRadiusMedium,
-          borderSide: const BorderSide(color: AppColors.border, width: 1),
+          borderSide: BorderSide(color: AppColors.border, width: 1),
         ),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderRadius: AppDimensions.borderRadiusMedium,
-          borderSide: const BorderSide(color: AppColors.border, width: 1),
+          borderSide: BorderSide(color: AppColors.border, width: 1),
         ),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderRadius: AppDimensions.borderRadiusMedium,
-          borderSide: const BorderSide(color: AppColors.base, width: 1.5),
+          borderSide: BorderSide(color: AppColors.base, width: 1.5),
         ),
-        errorBorder: OutlineInputBorder(
+        errorBorder: const OutlineInputBorder(
           borderRadius: AppDimensions.borderRadiusMedium,
-          borderSide: const BorderSide(color: AppColors.danger, width: 1),
+          borderSide: BorderSide(color: AppColors.danger, width: 1),
         ),
-        focusedErrorBorder: OutlineInputBorder(
+        focusedErrorBorder: const OutlineInputBorder(
           borderRadius: AppDimensions.borderRadiusMedium,
-          borderSide: const BorderSide(color: AppColors.danger, width: 1.5),
+          borderSide: BorderSide(color: AppColors.danger, width: 1.5),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(

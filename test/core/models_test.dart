@@ -4,21 +4,15 @@ import 'package:ayodex/core/models/user_model.dart';
 import 'package:ayodex/core/models/general_setting_model.dart';
 import 'package:ayodex/core/models/dynamic_form_model.dart';
 import 'package:ayodex/core/models/paginated_response.dart';
-import 'package:ayodex/features/dashboard/data/models/dashboard_model.dart';
-import 'package:ayodex/features/exchange/data/models/currency_model.dart';
-import 'package:ayodex/features/exchange/data/models/exchange_model.dart';
 import 'package:ayodex/features/transfers/data/models/bank_model.dart';
 import 'package:ayodex/features/transfers/data/models/transfer_quote_model.dart';
 import 'package:ayodex/features/transfers/data/models/transfer_model.dart';
-import 'package:ayodex/features/pin/data/models/pin_status_model.dart';
 import 'package:ayodex/features/wallet/data/models/transaction_model.dart';
-import 'package:ayodex/features/withdraw/data/models/withdrawal_model.dart';
-import 'package:ayodex/features/support/data/models/ticket_model.dart';
-import 'package:ayodex/features/notifications/data/models/notification_model.dart';
 
 void main() {
   group('UserModel Deserialization Tests', () {
-    test('Parses User JSON correctly with Decimal balance and status flags', () {
+    test('Parses User JSON correctly with Decimal balance and status flags',
+        () {
       final json = {
         'id': 13,
         'firstname': 'Jane',

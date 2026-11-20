@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ayodex/features/auth/presentation/screens/login_screen.dart';
@@ -8,12 +8,14 @@ import 'package:ayodex/features/auth/presentation/screens/complete_profile_scree
 
 void main() {
   group('OnboardingScreen Widget Tests', () {
-    testWidgets('Renders onboarding elements and action buttons', (tester) async {
+    testWidgets('Renders onboarding elements and action buttons',
+        (tester) async {
       await tester.pumpWidget(const MaterialApp(
         home: OnboardingScreen(),
       ));
 
-      expect(find.text('Fast & Transparent Multi-Currency Exchange'), findsOneWidget);
+      expect(find.text('Fast & Transparent Multi-Currency Exchange'),
+          findsOneWidget);
       expect(find.text('Get Started'), findsOneWidget);
       expect(find.text('Sign In'), findsOneWidget);
       expect(find.text('EN'), findsOneWidget);
@@ -36,7 +38,8 @@ void main() {
       expect(find.text('Password is required'), findsOneWidget);
     });
 
-    testWidgets('Tapping password visibility toggles obscureText', (tester) async {
+    testWidgets('Tapping password visibility toggles obscureText',
+        (tester) async {
       await tester.pumpWidget(const ProviderScope(
         child: MaterialApp(
           home: LoginScreen(),
@@ -46,7 +49,8 @@ void main() {
       final passwordFieldFinder = find.byKey(const Key('login_password_field'));
       expect(passwordFieldFinder, findsOneWidget);
 
-      final iconButtonFinder = find.byKey(const Key('password_visibility_toggle'));
+      final iconButtonFinder =
+          find.byKey(const Key('password_visibility_toggle'));
       expect(iconButtonFinder, findsOneWidget);
 
       // Initially obscured
@@ -77,9 +81,12 @@ void main() {
 
       await tester.enterText(find.byKey(const Key('reg_firstname')), 'John');
       await tester.enterText(find.byKey(const Key('reg_lastname')), 'Doe');
-      await tester.enterText(find.byKey(const Key('reg_email')), 'john@test.com');
-      await tester.enterText(find.byKey(const Key('reg_password')), 'Password#1');
-      await tester.enterText(find.byKey(const Key('reg_password_confirmation')), 'Password#2');
+      await tester.enterText(
+          find.byKey(const Key('reg_email')), 'john@test.com');
+      await tester.enterText(
+          find.byKey(const Key('reg_password')), 'Password#1');
+      await tester.enterText(
+          find.byKey(const Key('reg_password_confirmation')), 'Password#2');
 
       await tester.ensureVisible(find.text('Create Account'));
       await tester.tap(find.text('Create Account'));
