@@ -14,7 +14,8 @@ class ExchangeTrackScreen extends ConsumerStatefulWidget {
   const ExchangeTrackScreen({super.key, this.initialExchangeId});
 
   @override
-  ConsumerState<ExchangeTrackScreen> createState() => _ExchangeTrackScreenState();
+  ConsumerState<ExchangeTrackScreen> createState() =>
+      _ExchangeTrackScreenState();
 }
 
 class _ExchangeTrackScreenState extends ConsumerState<ExchangeTrackScreen> {
@@ -84,7 +85,7 @@ class _ExchangeTrackScreenState extends ConsumerState<ExchangeTrackScreen> {
                 style: AppTextTheme.displayLarge.copyWith(fontSize: 22),
               ),
               const SizedBox(height: 6),
-              const Text(
+              Text(
                 'Enter your unique Exchange ID to see real-time execution progress.',
                 style: AppTextTheme.bodyMedium,
               ),
@@ -97,7 +98,8 @@ class _ExchangeTrackScreenState extends ConsumerState<ExchangeTrackScreen> {
                       controller: _searchController,
                       decoration: const InputDecoration(
                         hintText: 'Enter Exchange ID (e.g. EX123456)',
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                       ),
                       onSubmitted: (_) => _handleTrack(),
                     ),
@@ -106,9 +108,13 @@ class _ExchangeTrackScreenState extends ConsumerState<ExchangeTrackScreen> {
                   SizedBox(
                     height: AppDimensions.inputHeight,
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: AppColors.base),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.base),
                       onPressed: _handleTrack,
-                      child: const Text('Track', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      child: const Text('Track',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
                     ),
                   ),
                 ],
@@ -117,29 +123,38 @@ class _ExchangeTrackScreenState extends ConsumerState<ExchangeTrackScreen> {
 
               // Loading Spinner
               if (_isLoading)
-                const Center(child: CircularProgressIndicator(color: AppColors.base))
+                const Center(
+                    child: CircularProgressIndicator(color: AppColors.base))
               else if (_errorMessage != null)
                 Container(
                   padding: const EdgeInsets.all(AppDimensions.p16),
                   decoration: BoxDecoration(
                     color: AppColors.danger.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-                    border: Border.all(color: AppColors.danger.withOpacity(0.3)),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.radiusMedium),
+                    border:
+                        Border.all(color: AppColors.danger.withOpacity(0.3)),
                   ),
-                  child: Text(_errorMessage!, style: AppTextTheme.bodyMedium.copyWith(color: AppColors.danger)),
+                  child: Text(_errorMessage!,
+                      style: AppTextTheme.bodyMedium
+                          .copyWith(color: AppColors.danger)),
                 )
               else if (_trackedExchange != null) ...[
                 // Tracking Stepper Card
                 CustomCard(
                   title: 'Order Status',
                   trailing: StatusBadge(
-                    label: _trackedExchange!.status == 1 ? 'Approved' : 'Processing',
-                    color: _trackedExchange!.status == 1 ? AppColors.success : AppColors.warning,
+                    label: _trackedExchange!.status == 1
+                        ? 'Approved'
+                        : 'Processing',
+                    color: _trackedExchange!.status == 1
+                        ? AppColors.success
+                        : AppColors.warning,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const _StepItem(
+                      _StepItem(
                         title: 'Order Placed',
                         subtitle: 'Exchange order registered in the system',
                         isCompleted: true,
@@ -198,7 +213,8 @@ class _StepItem extends StatelessWidget {
               width: 24,
               height: 24,
               decoration: BoxDecoration(
-                color: isCompleted ? AppColors.success : AppColors.surfaceSubtle,
+                color:
+                    isCompleted ? AppColors.success : AppColors.surfaceSubtle,
                 shape: BoxShape.circle,
                 border: Border.all(color: color),
               ),
@@ -231,7 +247,8 @@ class _StepItem extends StatelessWidget {
               const SizedBox(height: 2),
               Text(
                 subtitle,
-                style: AppTextTheme.caption.copyWith(color: AppColors.textMuted),
+                style:
+                    AppTextTheme.caption.copyWith(color: AppColors.textMuted),
               ),
               const SizedBox(height: 16),
             ],

@@ -13,7 +13,8 @@ class SupportTicketsScreen extends ConsumerStatefulWidget {
   const SupportTicketsScreen({super.key});
 
   @override
-  ConsumerState<SupportTicketsScreen> createState() => _SupportTicketsScreenState();
+  ConsumerState<SupportTicketsScreen> createState() =>
+      _SupportTicketsScreenState();
 }
 
 class _SupportTicketsScreenState extends ConsumerState<SupportTicketsScreen> {
@@ -65,11 +66,14 @@ class _SupportTicketsScreenState extends ConsumerState<SupportTicketsScreen> {
         onPressed: () => context.push('/support/create'),
         backgroundColor: AppColors.base,
         icon: const Icon(Icons.add, color: Colors.white),
-        label: const Text('Open Ticket', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        label: const Text('Open Ticket',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          await ref.read(ticketControllerProvider.notifier).loadTickets(refresh: true);
+          await ref
+              .read(ticketControllerProvider.notifier)
+              .loadTickets(refresh: true);
         },
         child: state.isLoading && state.tickets.isEmpty
             ? const Center(child: CircularProgressIndicator())
@@ -78,13 +82,16 @@ class _SupportTicketsScreenState extends ConsumerState<SupportTicketsScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.support_agent_outlined, size: 64, color: AppColors.textMuted),
+                        const Icon(Icons.support_agent_outlined,
+                            size: 64, color: AppColors.textMuted),
                         const SizedBox(height: 16),
-                        const Text('No support tickets', style: AppTextTheme.bodyLarge),
+                        Text('No support tickets',
+                            style: AppTextTheme.bodyLarge),
                         const SizedBox(height: 8),
                         Text(
                           'Need help? Open a new ticket anytime.',
-                          style: AppTextTheme.caption.copyWith(color: AppColors.textMuted),
+                          style: AppTextTheme.caption
+                              .copyWith(color: AppColors.textMuted),
                         ),
                       ],
                     ),
@@ -98,7 +105,9 @@ class _SupportTicketsScreenState extends ConsumerState<SupportTicketsScreen> {
                         return Center(
                           child: TextButton(
                             onPressed: () {
-                              ref.read(ticketControllerProvider.notifier).loadTickets();
+                              ref
+                                  .read(ticketControllerProvider.notifier)
+                                  .loadTickets();
                             },
                             child: const Text('Load More'),
                           ),
@@ -107,13 +116,16 @@ class _SupportTicketsScreenState extends ConsumerState<SupportTicketsScreen> {
 
                       final ticket = state.tickets[index];
                       final dateStr = ticket.lastReply != null
-                          ? DateFormat('MMM dd, yyyy • hh:mm a').format(ticket.lastReply!)
+                          ? DateFormat('MMM dd, yyyy • hh:mm a')
+                              .format(ticket.lastReply!)
                           : ticket.createdAt != null
-                              ? DateFormat('MMM dd, yyyy • hh:mm a').format(ticket.createdAt!)
+                              ? DateFormat('MMM dd, yyyy • hh:mm a')
+                                  .format(ticket.createdAt!)
                               : 'N/A';
 
                       return CustomCard(
-                        onTap: () => context.push('/support/view/${ticket.ticket}'),
+                        onTap: () =>
+                            context.push('/support/view/${ticket.ticket}'),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -145,7 +157,8 @@ class _SupportTicketsScreenState extends ConsumerState<SupportTicketsScreen> {
                             const SizedBox(height: 8),
                             Text(
                               ticket.subject,
-                              style: AppTextTheme.bodyLarge.copyWith(fontWeight: FontWeight.bold),
+                              style: AppTextTheme.bodyLarge
+                                  .copyWith(fontWeight: FontWeight.bold),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -157,9 +170,11 @@ class _SupportTicketsScreenState extends ConsumerState<SupportTicketsScreen> {
                               children: [
                                 Text(
                                   'Last Reply: $dateStr',
-                                  style: AppTextTheme.caption.copyWith(color: AppColors.textMuted),
+                                  style: AppTextTheme.caption
+                                      .copyWith(color: AppColors.textMuted),
                                 ),
-                                const Icon(Icons.arrow_forward_ios, size: 12, color: AppColors.textMuted),
+                                const Icon(Icons.arrow_forward_ios,
+                                    size: 12, color: AppColors.textMuted),
                               ],
                             ),
                           ],

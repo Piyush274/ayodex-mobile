@@ -14,13 +14,20 @@ class ExchangeHistoryScreen extends ConsumerStatefulWidget {
   const ExchangeHistoryScreen({super.key, this.initialScope});
 
   @override
-  ConsumerState<ExchangeHistoryScreen> createState() => _ExchangeHistoryScreenState();
+  ConsumerState<ExchangeHistoryScreen> createState() =>
+      _ExchangeHistoryScreenState();
 }
 
 class _ExchangeHistoryScreenState extends ConsumerState<ExchangeHistoryScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final List<String> _scopes = ['all', 'pending', 'approved', 'refunded', 'cancel'];
+  final List<String> _scopes = [
+    'all',
+    'pending',
+    'approved',
+    'refunded',
+    'cancel'
+  ];
 
   @override
   void initState() {
@@ -31,21 +38,22 @@ class _ExchangeHistoryScreenState extends ConsumerState<ExchangeHistoryScreen>
       if (idx != -1) initialIndex = idx;
     }
 
-    _tabController = TabController(length: _scopes.length, vsync: this, initialIndex: initialIndex);
+    _tabController = TabController(
+        length: _scopes.length, vsync: this, initialIndex: initialIndex);
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) {
         final scope = _scopes[_tabController.index];
         ref.read(exchangeControllerProvider.notifier).loadHistory(
-          scope: scope == 'all' ? null : scope,
-        );
+              scope: scope == 'all' ? null : scope,
+            );
       }
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final scope = _scopes[initialIndex];
       ref.read(exchangeControllerProvider.notifier).loadHistory(
-        scope: scope == 'all' ? null : scope,
-      );
+            scope: scope == 'all' ? null : scope,
+          );
     });
   }
 
@@ -105,22 +113,27 @@ class _ExchangeHistoryScreenState extends ConsumerState<ExchangeHistoryScreen>
       ),
       body: SafeArea(
         child: state.isLoading && state.history.isEmpty
-            ? const Center(child: CircularProgressIndicator(color: AppColors.base))
+            ? const Center(
+                child: CircularProgressIndicator(color: AppColors.base))
             : state.history.isEmpty
                 ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.swap_horiz_rounded, size: 54, color: AppColors.textMuted),
+                        const Icon(Icons.swap_horiz_rounded,
+                            size: 54, color: AppColors.textMuted),
                         const SizedBox(height: 12),
-                        Text('No exchanges in this category', style: AppTextTheme.headingMedium.copyWith(color: AppColors.textMuted)),
+                        Text('No exchanges in this category',
+                            style: AppTextTheme.headingMedium
+                                .copyWith(color: AppColors.textMuted)),
                       ],
                     ),
                   )
                 : ListView.separated(
                     padding: const EdgeInsets.all(AppDimensions.p16),
                     itemCount: state.history.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: AppDimensions.p12),
+                    separatorBuilder: (_, __) =>
+                        const SizedBox(height: AppDimensions.p12),
                     itemBuilder: (context, index) {
                       final item = state.history[index];
                       final statusColor = _getStatusColor(item.status);
@@ -128,24 +141,29 @@ class _ExchangeHistoryScreenState extends ConsumerState<ExchangeHistoryScreen>
                       return Card(
                         elevation: 0,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppDimensions.radiusCard),
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radiusCard),
                           side: const BorderSide(color: AppColors.border),
                         ),
                         color: AppColors.surface,
                         child: InkWell(
-                          onTap: () => context.push('/exchange/details?id=${item.exchangeId}'),
-                          borderRadius: BorderRadius.circular(AppDimensions.radiusCard),
+                          onTap: () => context
+                              .push('/exchange/details?id=${item.exchangeId}'),
+                          borderRadius:
+                              BorderRadius.circular(AppDimensions.radiusCard),
                           child: Padding(
                             padding: const EdgeInsets.all(AppDimensions.p16),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Order #${item.exchangeId}',
-                                      style: AppTextTheme.bodyLarge.copyWith(fontWeight: FontWeight.bold),
+                                      style: AppTextTheme.bodyLarge.copyWith(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     StatusBadge(
                                       label: _getStatusText(item.status),
@@ -155,21 +173,35 @@ class _ExchangeHistoryScreenState extends ConsumerState<ExchangeHistoryScreen>
                                 ),
                                 const Divider(height: 16),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        const Text('Send', style: AppTextTheme.caption),
-                                        Text('${item.sendingAmount}', style: AppTextTheme.bodyLarge.copyWith(fontWeight: FontWeight.bold)),
+                                        Text('Send',
+                                            style: AppTextTheme.caption),
+                                        Text('${item.sendingAmount}',
+                                            style: AppTextTheme.bodyLarge
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.bold)),
                                       ],
                                     ),
-                                    const Icon(Icons.arrow_forward_rounded, color: AppColors.textMuted, size: 20),
+                                    const Icon(Icons.arrow_forward_rounded,
+                                        color: AppColors.textMuted, size: 20),
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
-                                        const Text('Receive', style: AppTextTheme.caption),
-                                        Text('${item.totalReceivedAmount}', style: AppTextTheme.bodyLarge.copyWith(fontWeight: FontWeight.bold, color: AppColors.success)),
+                                        Text('Receive',
+                                            style: AppTextTheme.caption),
+                                        Text('${item.totalReceivedAmount}',
+                                            style: AppTextTheme.bodyLarge
+                                                .copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: AppColors.success)),
                                       ],
                                     ),
                                   ],
@@ -177,7 +209,8 @@ class _ExchangeHistoryScreenState extends ConsumerState<ExchangeHistoryScreen>
                                 if (item.createdAt != null) ...[
                                   const SizedBox(height: 8),
                                   Text(
-                                    DateFormat('dd MMM yyyy, HH:mm').format(item.createdAt!),
+                                    DateFormat('dd MMM yyyy, HH:mm')
+                                        .format(item.createdAt!),
                                     style: AppTextTheme.caption,
                                   ),
                                 ],
